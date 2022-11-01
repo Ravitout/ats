@@ -22,7 +22,7 @@
     <td><%= @candidate.availability_for_joining %></td>
     <td><%= @candidate.current_location %></td>
     <td><%= @candidate.user_id %></td>
-    <td><%= @candidate.resume %></td>
+       <td><%=link_to 'download', rails_blob_path(@candidate.avatar, disposition: "attachment")%></td>
   </tr>
 </table>
   <li><%= link_to "Edit", edit_candidate_path(@candidate) %></li>
