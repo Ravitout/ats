@@ -1,0 +1,23 @@
+<h1>Candidate details</h1>
+<table>
+  <tr>
+    <th>Candidate ID</th>
+    <th>First Name</th>
+    <th>Last Name</th>
+    <th>Current Designation</th>
+  </tr>
+<!-- </table>
+<table> -->
+  <% @candidates.each do |candidate| %>
+  <tr>
+    <td><a href="/candidates/<%= candidate.id %>">
+        <%= candidate.id %>
+    </a></td>
+    <td><%= candidate.first_name %></td>
+    <td><%= candidate.last_name %></td>
+    <td><%= candidate.current_designation %></td>
+  </tr>
+  <% end %>
+</table>
+
+<%= link_to "New candidate", new_candidate_path %>

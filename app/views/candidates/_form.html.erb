@@ -1,0 +1,63 @@
+<%= form_with model: @candidate do |form| %>
+  <div>
+    <%= form.label :first_name %><br>
+    <%= form.text_field :first_name %>
+    <% @candidate.errors.full_messages_for(:first_name).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.label :last_name %><br>
+    <%= form.text_field :last_name %>
+    <% @candidate.errors.full_messages_for(:last_name).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+  <div>
+    <%= form.label :email %><br>
+    <%= form.text_area :email %>
+    <% @candidate.errors.full_messages_for(:email).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+  <div>
+    <%= form.label :current_location %><br>
+    <%= form.text_area :current_location %>
+    <% @candidate.errors.full_messages_for(:current_location).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+  <div>
+    <%= form.label :experience%><br>
+    <%= form.text_area :experience %>
+    <% @candidate.errors.full_messages_for(:experience).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+  <div>
+    <%= form.label :current_designation %><br>
+    <%= form.text_area :current_designation %>
+    <% @candidate.errors.full_messages_for(:current_designation).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+  <div>
+    <%= form.label :availability_for_joining %><br>
+    <%= form.date_field :availability_for_joining, attribute: 'date' %>
+
+    <% @candidate.errors.full_messages_for(:availability_for_joining).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+  <div>
+    <%= form.label :user_id %><br>
+    <%= form.text_field :user_id %>
+    <% @candidate.errors.full_messages_for(:user_id).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

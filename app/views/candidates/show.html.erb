@@ -1,0 +1,33 @@
+<h3>Candidate Details</h3>
+<table>
+  <tr>
+    <th>Candidate ID</th>
+    <th>First Name</th>
+    <th>Last Name</th>
+    <th>Current Designation</th>
+    <th>Experience</th>
+    <th>Availability</th>
+    <th>Current location</th>
+    <th>User name/ID</th>
+    <th>Resume</th>
+  </tr>
+  <tr>
+    <td><a href="/candidates/<%= @candidate.id %>">
+        <%= @candidate.id %>
+    </a></td>
+    <td><%= @candidate.first_name %></td>
+    <td><%= @candidate.last_name %></td>
+    <td><%= @candidate.current_designation %></td>
+    <td><%= @candidate.experience %></td>
+    <td><%= @candidate.availability_for_joining %></td>
+    <td><%= @candidate.current_location %></td>
+    <td><%= @candidate.user_id %></td>
+    <td><%= @candidate.resume %></td>
+  </tr>
+</table>
+  <li><%= link_to "Edit", edit_candidate_path(@candidate) %></li>
+    <li><%= link_to "Destroy", candidate_path(@candidate),
+                  method: :delete,
+                  data: { confirm: "Are you sure?" } %></li>
+
+<%= link_to "Back", candidates_path %>

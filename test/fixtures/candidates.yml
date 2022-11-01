@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  first_name: MyString
+  last_name: MyString
+  email: MyString
+  current_location: MyString
+  experience: 1
+  availability: 2022-10-28
+  user_id: 1
+
+two:
+  first_name: MyString
+  last_name: MyString
+  email: MyString
+  current_location: MyString
+  experience: 1
+  availability: 2022-10-28
+  user_id: 1

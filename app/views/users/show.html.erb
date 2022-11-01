@@ -1,0 +1,26 @@
+<table>
+  <tr>
+    <th>User ID</th>
+    <th>First Name</th>
+    <th>Last Name</th>
+    <th>Email-ID</th>
+    <th>Role ID</th>
+  </tr>
+  <tr>
+    <td><a href="/users/<%= @user.id %>">
+        <%= @user.id %>
+    </a></td>
+    <td><%= @user.first_name %></td>
+    <td><%= @user.last_name %></td>
+    <td><%= @user.email %></td>
+    <td><%= @user.role_id %></td>
+  </tr>
+</table>
+
+<ul>
+  <li><%= link_to "Edit", edit_user_path(@user) %></li>
+    <li><%= link_to "Destroy", user_path(@user),
+                  method: :delete,
+                  data: { confirm: "Are you sure?" } %></li>
+</ul>
+<%= link_to "Back", users_path %>
