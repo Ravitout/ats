@@ -30,35 +30,28 @@
   </div>
   <div>
     <%= form.label :role_id %><br>
-    <%= form.text_field :role_id %>
+    <%= form.select :role_id, Role.all.pluck(:designation, :id ) %>
     <% @user.errors.full_messages_for(:role_id).each do |message| %>
       <div><%= message %></div>
     <% end %>
-  <div class="dropdown">
-  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-    Dropdown button
-  </button>
-  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-    <li><a class="dropdown-item" href="#">Action</a></li>
-    <li><a class="dropdown-item" href="#">Another action</a></li>
-    <li><a class="dropdown-item" href="#">Something else here</a></li>
-  </ul>
-</div>
-    <div>
+  </div>
+
+  <div>
     <%= form.label :password %><br>
     <%= form.text_field :password %>
     <% @user.errors.full_messages_for(:password).each do |message| %>
       <div><%= message %></div>
     <% end %>
   </div>
-    <div>
+
+  <div>
     <%= form.label :password_confirmation %><br>
     <%= form.text_field :password_confirmation %>
     <% @user.errors.full_messages_for(:password_confirmation).each do |message| %>
       <div><%= message %></div>
     <% end %>
   </div>
-  <%= form.file_field :avatar %>
+  <%#= form.file_field :avatar %>
   <div>
     <%= form.submit %>
   </div>
