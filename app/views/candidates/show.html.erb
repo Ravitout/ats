@@ -23,6 +23,8 @@
     <td><%= @candidate.current_location %></td>
     <td><%= @candidate.user_id %></td>
        <td><%=link_to 'download', rails_blob_path(@candidate.avatar, disposition: "attachment")%></td>
+       <td><%=link_to 'preview', rails_blob_path(@candidate.avatar, disposition: "preview"), target: '_blank'%></td>
+
   </tr>
 </table>
   <li><%= link_to "Edit", edit_candidate_path(@candidate) %></li>
