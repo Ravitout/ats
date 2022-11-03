@@ -11,10 +11,11 @@ class CandidatesController < ApplicationController
   end
   def create
     @candidate = Candidate.new(candidate_params)
-    redirect_to message
+    # redirect_to message
     # binding.pry
     if @candidate.save
       redirect_to @candidate
+      # render :show, notice: "Submitted"
     else
       render :new
     end

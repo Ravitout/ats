@@ -13,4 +13,11 @@
     <%= form.submit %>
   </div>
 
+<%= link_to "Back", users_path %>
+
+<% flash.each do |type, msg| %>
+  <div class="alert alert-info">
+    <%= msg %>
+  </div>
+<% end %>
 <% end %>

@@ -5,17 +5,15 @@ class SessionsController < ApplicationController
   end
   def create
     user = User.find_by(email: params[:email])
-    password = user.password
-    # db_user = User.where(email: "#{params[:email]}")
-    # db_password = db_user.password
-    # if user.present? && user.authenticate(params[:password])
-    # binding.pry
-    if user.present? && user.email == params[:email] && password == params[:password]
-      session[user.id] = user.id
-      redirect_to root_path, notice: "logged in successfully"
-    else
-      render :new
-      flash[:alert] = "invalid user or password"
+    if user.present? && user.email == params[:email] 
+      password = user.password
+      if password == params[:password]
+        session[user.id] = user.id
+        redirect_to root_path, notice: "logged in successfully"
+      end
+      else
+        flash[:notice] = "invalid email or password"
+        render :new
     end
   end
   def destroy
