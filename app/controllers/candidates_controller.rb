@@ -12,11 +12,12 @@ class CandidatesController < ApplicationController
   def create
     @candidate = Candidate.new(candidate_params)
     # redirect_to message
+    
     # binding.pry
     if @candidate.save
       redirect_to @candidate
-      # render :show, notice: "Submitted"
-    else
+      # render :show
+    else  
       render :new
     end
   end
@@ -41,6 +42,6 @@ class CandidatesController < ApplicationController
   end
   private
    def candidate_params
-      params.require(:candidate).permit(:first_name, :last_name, :avatar, :email, :current_location, :experience, :current_designation, :availability_for_joining, :user_id)
+      params.require(:candidate).permit(:first_name, :last_name, :avatar, :email, :current_location, :experience, :current_designation, :availability_for_joining)
    end
 end

@@ -1,5 +1,5 @@
 <h3>Candidate Details</h3>
-<table>
+<table class="table table-hover">
   <tr>
     <th>Candidate ID</th>
     <th>First Name</th>
@@ -8,8 +8,8 @@
     <th>Experience</th>
     <th>Availability</th>
     <th>Current location</th>
-    <th>User name/ID</th>
     <th>Resume</th>
+    <th>Preview</th>
   </tr>
   <tr>
     <td><a href="/candidates/<%= @candidate.id %>">
@@ -21,7 +21,7 @@
     <td><%= @candidate.experience %></td>
     <td><%= @candidate.availability_for_joining %></td>
     <td><%= @candidate.current_location %></td>
-    <td><%= @candidate.user_id %></td>
+    <!-- <td><%#= @candidate.user_id %></td> -->
     <td><%=link_to 'download', rails_blob_path(@candidate.avatar, disposition: "attachment")%></td>
     <td><%=link_to 'preview', rails_blob_path(@candidate.avatar, disposition: "preview"), target: '_blank'%></td>
 

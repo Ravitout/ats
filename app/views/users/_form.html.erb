@@ -1,58 +1,67 @@
 <%= form_with model: @user do |form| %>
-  <div>
-    <%= form.label :first_name %><br>
-    <%= form.text_field :first_name %>
+<div class="card">
+  <div class="card-body">
+  <div class="mb-3">
+    <%= form.label :first_name, { class: "form-label"}%><br>
+    <div>
+    <%= form.text_field :first_name , { class: "form-control" }%>
     <% @user.errors.full_messages_for(:first_name).each do |message| %>
       <div><%= message %></div>
     <% end %>
   </div>
+  </div>
 
-  <div>
-    <%= form.label :last_name %><br>
-    <%= form.text_field :last_name %>
+  <div class="mb-3">
+    <%= form.label :last_name , { class: "form-label"}%><br>
+    <%= form.text_field :last_name , { class: "form-control" }%>
     <% @user.errors.full_messages_for(:last_name).each do |message| %>
       <div><%= message %></div>
     <% end %>
   </div>
-  <div>
-    <%= form.label :email %><br>
-    <%= form.text_field :email %>
+
+  <div class="mb-3">
+    <%= form.label :email, { class: "form-label"} %><br>
+    <%= form.text_field :email , { class: "form-control" }%>
     <% @user.errors.full_messages_for(:email).each do |message| %>
       <div><%= message %></div>
     <% end %>
   </div>
-    <div>
-    <%= form.label :email_confirmation %><br>
-    <%= form.text_field :email_confirmation %>
+
+    <div class="mb-3">
+    <%= form.label :email_confirmation , { class: "form-label"}%><br>
+    <%= form.text_field :email_confirmation , { class: "form-control" }%>
     <% @user.errors.full_messages_for(:email_confirmation).each do |message| %>
       <div><%= message %></div>
     <% end %>
-  </div>
+
+  </div class="mb-3">
   <div>
-    <%= form.label :role_id %><br>
-    <%= form.select :role_id, Role.all.pluck(:designation, :id ) %>
+    <%= form.label :role_id , { class: "form-label"}%><br>
+    <%= form.select :role_id, Role.all.pluck(:designation, :id ),{ class:"form-select form-select-lg mb-3" } %>
     <% @user.errors.full_messages_for(:role_id).each do |message| %>
       <div><%= message %></div>
     <% end %>
-  </div>
+  </div> 
 
-  <div>
-    <%= form.label :password %><br>
-    <%= form.text_field :password %>
+  <div class="mb-3">
+    <%= form.label :password, { class: "form-label"} %><br>
+    <%= form.text_field :password , { class: "form-control" }%>
     <% @user.errors.full_messages_for(:password).each do |message| %>
       <div><%= message %></div>
     <% end %>
   </div>
 
-  <div>
-    <%= form.label :password_confirmation %><br>
-    <%= form.text_field :password_confirmation %>
+  <div class="mb-3">
+    <%= form.label :password_confirmation , { class: "form-label"}%><br>
+    <%= form.text_field :password_confirmation , { class: "form-control" }%>
     <% @user.errors.full_messages_for(:password_confirmation).each do |message| %>
       <div><%= message %></div>
     <% end %>
   </div>
-  <%#= form.file_field :avatar %>
-  <div>
+  
+  <div class="mb-3">
     <%= form.submit %>
   </div>
+</div>
+</div>
 <% end %>

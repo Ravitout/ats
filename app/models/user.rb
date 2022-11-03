@@ -1,7 +1,6 @@
 class User < ApplicationRecord
   # has_secure_password
-	has_many :candidates
-  has_one_attached :avatar
+	# has_many :candidates
 	belongs_to :role
   validates :first_name, presence: true
   validates :last_name, presence: true
