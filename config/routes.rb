@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
-resources :users do
-	get "sign_in"
-end
+resources :users 
 resources :candidates
 root "candidates#index"
+  # get 'sessions/new'
+  get    'sign_in', to: 'sessions#new'
+  post   'sign_in', to: 'sessions#create'
+  delete 'logout', to: 'sessions#destroy' 
 end
