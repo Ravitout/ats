@@ -1,67 +1,67 @@
 <%= form_with model: @user do |form| %>
 <div class="card">
   <div class="card-body">
-  <div class="mb-3">
-    <%= form.label :first_name, { class: "form-label"}%><br>
-    <div>
-    <%= form.text_field :first_name , { class: "form-control" }%>
-    <% @user.errors.full_messages_for(:first_name).each do |message| %>
-      <div><%= message %></div>
-    <% end %>
-  </div>
-  </div>
-
-  <div class="mb-3">
-    <%= form.label :last_name , { class: "form-label"}%><br>
-    <%= form.text_field :last_name , { class: "form-control" }%>
-    <% @user.errors.full_messages_for(:last_name).each do |message| %>
-      <div><%= message %></div>
-    <% end %>
-  </div>
-
-  <div class="mb-3">
-    <%= form.label :email, { class: "form-label"} %><br>
-    <%= form.text_field :email , { class: "form-control" }%>
-    <% @user.errors.full_messages_for(:email).each do |message| %>
-      <div><%= message %></div>
-    <% end %>
-  </div>
+    <div class="mb-3">
+      <%= form.label :first_name, { class: "form-label"}%><br>
+      <div>
+        <%= form.text_field :first_name , { class: "form-control" }%>
+        <% @user.errors.full_messages_for(:first_name).each do |message| %>
+          <div><%= message %></div>
+        <% end %>
+      </div>
+    </div>
 
     <div class="mb-3">
-    <%= form.label :email_confirmation , { class: "form-label"}%><br>
-    <%= form.text_field :email_confirmation , { class: "form-control" }%>
-    <% @user.errors.full_messages_for(:email_confirmation).each do |message| %>
-      <div><%= message %></div>
-    <% end %>
+      <%= form.label :last_name , { class: "form-label"}%><br>
+      <%= form.text_field :last_name , { class: "form-control" }%>
+      <% @user.errors.full_messages_for(:last_name).each do |message| %>
+        <div><%= message %></div>
+      <% end %>
+    </div>
 
-  </div class="mb-3">
-  <div>
-    <%= form.label :role_id , { class: "form-label"}%><br>
-    <%= form.select :role_id, Role.all.pluck(:designation, :id ),{ class:"form-select form-select-lg mb-3" } %>
-    <% @user.errors.full_messages_for(:role_id).each do |message| %>
-      <div><%= message %></div>
-    <% end %>
-  </div> 
+    <div class="mb-3">
+      <%= form.label :email, { class: "form-label"} %><br>
+      <%= form.text_field :email , { class: "form-control" }%>
+      <% @user.errors.full_messages_for(:email).each do |message| %>
+        <div><%= message %></div>
+      <% end %>
+    </div>
 
-  <div class="mb-3">
-    <%= form.label :password, { class: "form-label"} %><br>
-    <%= form.text_field :password , { class: "form-control" }%>
-    <% @user.errors.full_messages_for(:password).each do |message| %>
-      <div><%= message %></div>
-    <% end %>
-  </div>
+    <div class="mb-3">
+      <%= form.label :email_confirmation , { class: "form-label"}%><br>
+      <%= form.text_field :email_confirmation , { class: "form-control" }%>
+      <% @user.errors.full_messages_for(:email_confirmation).each do |message| %>
+        <div><%= message %></div>
+      <% end %>
 
-  <div class="mb-3">
-    <%= form.label :password_confirmation , { class: "form-label"}%><br>
-    <%= form.text_field :password_confirmation , { class: "form-control" }%>
-    <% @user.errors.full_messages_for(:password_confirmation).each do |message| %>
-      <div><%= message %></div>
-    <% end %>
-  </div>
+    </div class="mb-3">
+    <div>
+      <%= form.label :role_id , { class: "form-label"}%><br>
+      <%= form.select :role_id, Role.all.pluck(:designation, :id ),{ class:"form-select form-select-lg mb-3" } %>
+      <% @user.errors.full_messages_for(:role_id).each do |message| %>
+        <div><%= message %></div>
+      <% end %>
+    </div> 
+
+    <div class="mb-3">
+      <%= form.label :password, { class: "form-label"} %><br>
+      <%= form.text_field :password , { class: "form-control" }%>
+      <% @user.errors.full_messages_for(:password).each do |message| %>
+        <div><%= message %></div>
+      <% end %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :password_confirmation , { class: "form-label"}%><br>
+      <%= form.text_field :password_confirmation , { class: "form-control" }%>
+      <% @user.errors.full_messages_for(:password_confirmation).each do |message| %>
+        <div><%= message %></div>
+      <% end %>
+    </div>
   
-  <div class="mb-3">
-    <%= form.submit %>
+    <div class="mb-3">
+      <%= form.submit %>
+    </div>
   </div>
-</div>
 </div>
 <% end %>
