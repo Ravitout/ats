@@ -16,11 +16,13 @@
     <td><%= @user.role.designation %></td>
   </tr>
 </table>
-
+<% if is_hr || is_sd %>
+<% else %>
 <ul>
   <li><%= link_to "Edit", edit_user_path(@user) %></li>
     <li><%= link_to "Destroy", user_path(@user),
                   method: :delete,
                   data: { confirm: "Are you sure?" } %></li>
 </ul>
+<% end %>
 <%= link_to "Back", users_path %>

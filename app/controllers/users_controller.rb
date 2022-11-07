@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :require_login, except: [:new, :create]
 	def index
 		@users = User.all
 	end
@@ -17,8 +18,13 @@ class UsersController < ApplicationController
     end
   end
     def edit
-    @user = User.find(params[:id])
-  end
+      if is_hr || is_sd
+        flash[:error] = "You must be logged in as admin to access this action"
+        redirect_to users_path
+      else
+        @user = User.find(params[:id])
+      end
+    end
 
   def update
     @user = User.find(params[:id])
@@ -30,10 +36,14 @@ class UsersController < ApplicationController
     end
   end
   def destroy
-    @user = User.find(params[:id])
-    @user.destroy
-
-    redirect_to users_path
+    # if is_hr || is_sd
+    #   flash[:error] = "You must be logged in as admin to access this action"
+    #   redirect_to users_path
+    # else
+      @user = User.find(params[:id])
+      @user.destroy
+      redirect_to users_path
+    # end
   end
   private
    def user_params

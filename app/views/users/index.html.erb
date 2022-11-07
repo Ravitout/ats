@@ -16,6 +16,11 @@
     <td><%= user.role.designation %></td>
   </tr>
   <% end %>
+    <% flash.each do |type, msg| %>
+    <div class="alert alert-info">
+     <%= msg %>
+    </div>
+  <% end %>
 </table>
 <%= link_to "New user", new_user_path %></br>
 <%= link_to "Existing user", sign_in_path %></br>

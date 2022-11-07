@@ -9,4 +9,5 @@ class User < ApplicationRecord
   validates :role_id, presence: true, length: { maximum:1 }
   validates :password, format: {with: /\A(?=.*[a-zA-Z])(?=.*[0-9]).{6,}\z/, message: 'need alphabet, numbers and special characters'}, confirmation: true
   validates :password_confirmation, presence: { message: "must be same as password" }
+
 end
