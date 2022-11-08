@@ -36,14 +36,14 @@ class UsersController < ApplicationController
     end
   end
   def destroy
-    # if is_hr || is_sd
-    #   flash[:error] = "You must be logged in as admin to access this action"
-    #   redirect_to users_path
-    # else
-      @user = User.find(params[:id])
-      @user.destroy
-      redirect_to users_path
-    # end
+    @user = User.find(params[:id])
+    @user.destroy
+    # redirect_to users_path
+    respond_to do |format|   
+      format.html { redirect_to user_url, notice: "User was Deleted" }   
+      format.json { head :no_content }   
+      format.js 
+    end
   end
   private
    def user_params

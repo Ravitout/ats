@@ -8,12 +8,18 @@
     <th>Designation</th>
   </tr>
   <% @users.each do |user| %>
-  <tr>
+  <tr id="userRow_<%=user.id%>">
     <td><a href="/users/<%= user.id %>">
         <%= user.id %>
     </a></td>
     <td><%= user.first_name %></td>
     <td><%= user.role.designation %></td>
+        <% if is_hr || is_sd %>
+    <% else %>
+    <td><%= link_to "Destroy", user,
+                  method: :delete,
+                  data: { confirm: "Are you sure?" }, remote: true %>
+    <% end %></td>
   </tr>
   <% end %>
     <% flash.each do |type, msg| %>

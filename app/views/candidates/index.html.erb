@@ -9,13 +9,19 @@
 <!-- </table>
 <table> -->
   <% @candidates.each do |candidate| %>
-  <tr>
+  <tr id="candidateRow_<%=candidate.id%>">
     <td><a href="/candidates/<%= candidate.id %>">
         <%= candidate.id %>
     </a></td>
     <td><%= candidate.first_name %></td>
     <td><%= candidate.last_name %></td>
     <td><%= candidate.current_designation %></td>
+    <% if is_hr || is_sd %>
+    <% else %>
+    <td><%= link_to "Destroy", candidate,
+                  method: :delete,
+                  data: { confirm: "Are you sure?" }, remote: true %>
+    <% end %></td>
   </tr>
   <% end %>
 </table>

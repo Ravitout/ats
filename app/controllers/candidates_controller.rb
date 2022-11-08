@@ -46,7 +46,12 @@ class CandidatesController < ApplicationController
   def destroy
       @candidate = Candidate.find(params[:id])
       @candidate.destroy
-      redirect_to candidates_path
+      # redirect_to candidates_path
+      respond_to do |format|   
+        format.html { redirect_to candidate_url, notice: "Candidate was Deleted" }   
+        format.json { head :no_content }   
+        format.js 
+      end
   end
 
   private
