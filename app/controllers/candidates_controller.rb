@@ -5,7 +5,7 @@ class CandidatesController < ApplicationController
   # before_action :is_sd, except: [:new, :create, :show]
 
 	def index
-		@candidates = Candidate.all
+		@candidates = Candidate.search(params[:search])
 	end
 
 	def show 
@@ -56,6 +56,6 @@ class CandidatesController < ApplicationController
 
   private
     def candidate_params
-      params.require(:candidate).permit(:first_name, :last_name, :avatar, :email, :current_location, :experience, :current_designation, :availability_for_joining)
+      params.require(:candidate).permit(:first_name, :search, :last_name, :avatar, :email, :current_location, :experience, :current_designation, :availability_for_joining)
     end
 end

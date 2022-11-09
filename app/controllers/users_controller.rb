@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :require_login, except: [:new, :create]
 	def index
-		@users = User.all
+		@users = User.search(params[:search])
 	end
 	def show 
 		@user = User.find(params[:id])
@@ -40,14 +40,14 @@ class UsersController < ApplicationController
     @user.destroy
     # redirect_to users_path
     respond_to do |format|   
-      format.html { redirect_to user_url, notice: "User was Deleted" }   
+      format.html { redirect_to user_url, flash[:error] = "User was Deleted" }   
       format.json { head :no_content }   
       format.js 
     end
   end
   private
    def user_params
-      params.require(:user).permit(:first_name, :last_name, :email, :email_confirmation, :password, :role_id, :password_confirmation, :avatar)
+      params.require(:user).permit(:first_name, :search ,:last_name, :email, :email_confirmation, :password, :role_id, :password_confirmation, :avatar)
    end
 end
 

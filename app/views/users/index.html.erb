@@ -1,5 +1,9 @@
 <h1>User details</h1>
-
+<h5>Search</h5>
+<%= form_tag(users_path, method: :get) do%>
+<%= text_field_tag(:search, params[:search])%>
+<%= submit_tag("Search")%>
+<%end%>
 </ul>
 <table class="table table-hover">
   <tr>
@@ -28,6 +32,6 @@
     </div>
   <% end %>
 </table>
-<%= link_to "New user", new_user_path %></br>
-<%= link_to "Existing user", sign_in_path %></br>
-<%= link_to "Search Canidates", candidates_path %>
+<%= link_to "New user", new_user_path , class:"btn btn-outline-primary"%>
+<%= link_to "Existing user", sign_in_path , class:"btn btn-outline-primary"%>
+<%= link_to "Search Canidates", candidates_path , class:"btn btn-outline-primary"%>

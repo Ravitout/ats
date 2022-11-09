@@ -1,4 +1,9 @@
 <h1>Candidate details</h1>
+<h5>Search</h5>
+<%= form_tag(candidates_path, method: :get) do%>
+<%= text_field_tag(:search, params[:search])%>
+<%= submit_tag("Search")%>
+<%end%>
 <table class="table table-hover">
   <tr>
     <th>Candidate ID</th>
@@ -25,8 +30,8 @@
   </tr>
   <% end %>
 </table>
-<%= link_to "New candidate", new_candidate_path %>
-<%= link_to "Back", users_path %>
+<%= link_to "New candidate", new_candidate_path, class:"btn btn-outline-primary" %>
+<%= link_to "Back", users_path, class:"btn btn-outline-primary" %>
 <% flash.each do |type, msg| %>
   <div class="alert alert-info">
     <%= msg %>
