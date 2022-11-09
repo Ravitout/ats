@@ -11,12 +11,7 @@ class Candidate < ApplicationRecord
 
 	def self.search(search)
     if search
-      candidate = Candidate.find_by(first_name: search)
-      if candidate
-        self.where(id: candidate)
-      else
-        Candidate.all
-      end
+      self.where('first_name LIKE :search OR last_name LIKE :search OR current_designation LIKE :search', search: "%#{search}")
     else
       Candidate.all
     end

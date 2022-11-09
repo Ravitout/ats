@@ -10,14 +10,10 @@ class User < ApplicationRecord
   validates :password, format: {with: /\A(?=.*[a-zA-Z])(?=.*[0-9]).{6,}\z/, message: 'need alphabet, numbers and special characters'}, confirmation: true
   validates :password_confirmation, presence: { message: "must be same as password" }
 
+
   def self.search(search)
     if search
-      user = User.find_by(first_name: search)
-      if user
-        self.where(id: user)
-      else
-        User.all
-      end
+      User.joins(:role).where('first_name LIKE :search OR roles.designation LIKE :search', search: "%#{search}")
     else
       User.all
     end
