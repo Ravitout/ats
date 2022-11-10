@@ -1,0 +1,32 @@
+<table class="table table-hover">
+  <tr>
+    <th>Candidate ID</th>
+    <th>First Name</th>
+    <th>Last Name</th>
+    <th>Current Designation</th>
+  </tr>
+<!-- </table>
+<table> -->
+  <% @candidates.each do |candidate| %>
+  <tr id="candidateRow_<%=candidate.id%>">
+    <td><a href="/candidates/<%= candidate.id %>">
+        <%= candidate.id %>
+    </a></td>
+    <td><%= candidate.first_name %></td>
+    <td><%= candidate.last_name %></td>
+    <td><%= candidate.current_designation %></td>
+    <% if is_hr || is_sd %>
+    <% else %>
+    <td><%= link_to "Destroy", candidate,
+                  method: :delete,
+                  data: { confirm: "Are you sure?" }, remote: true %>
+    <% end %></td>
+  </tr>
+  <% end %>
+</table>
+
+<% flash.each do |type, msg| %>
+  <div class="alert alert-info">
+    <%= msg %>
+  </div>
+<% end %>

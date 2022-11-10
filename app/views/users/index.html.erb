@@ -1,37 +1,27 @@
 <h1>User details</h1>
 <h5>Search</h5>
-<%= form_tag(users_path, method: :get) do%>
-<%= text_field_tag(:search, params[:search])%>
-<%= submit_tag("Search")%>
+<%= form_tag(users_path, method: :get, id: "user_search") do%>
+<%= text_field_tag(:search, params[:search], id: "search_users")%>
+<%#= submit_tag("Search")%>
 <%end%>
-</ul>
-<table class="table table-hover">
-  <tr>
-    <th>User ID</th>
-    <th>First Name</th>
-    <th>Designation</th>
-  </tr>
-  <% @users.each do |user| %>
-  <tr id="userRow_<%=user.id%>">
-    <td><a href="/users/<%= user.id %>">
-        <%= user.id %>
-    </a></td>
-    <td><%= user.first_name %></td>
-    <td><%= user.role.designation %></td>
-        <% if is_hr || is_sd %>
-    <% else %>
-    <td><%= link_to "Destroy", user,
-                  method: :delete,
-                  data: { confirm: "Are you sure?" }, remote: true %>
-    <% end %></td>
-  </tr>
-  <% end %>
-    <% flash.each do |type, msg| %>
-    <div class="alert alert-info">
-     <%= msg %>
-    </div>
-  <% end %>
-</table>
+
+<div id="users_table">
+  <%= render "index"%>
+</div>
+
 <%= link_to "New user", new_user_path , class:"btn btn-outline-primary"%>
 <%= link_to "Existing user", sign_in_path , class:"btn btn-outline-primary"%>
 <%= link_to "Search Canidates", candidates_path , class:"btn btn-outline-primary"%>
+
+
+<script type="text/javascript">
+  $("#search_users").keyup(function(){
+    text = $("#search_users").val();
+    // console.log("ajax called............" + text);
+    $.ajax({
+      type: 'GET',
+      url: "/users.js",
+      data: {"q": text}
+    });
+  });
+</script>

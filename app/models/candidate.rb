@@ -9,11 +9,11 @@ class Candidate < ApplicationRecord
 	validates :current_designation, presence: true
 	validates :availability_for_joining, presence: true
 
-	def self.search(search)
-    if search
-      self.where('first_name LIKE :search OR last_name LIKE :search OR current_designation LIKE :search', search: "%#{search}")
-    else
-      Candidate.all
-    end
-  end
+# 	def self.search(search)
+#     if search
+#       self.where('first_name LIKE :search OR last_name LIKE :search OR current_designation LIKE :search', search: "%#{search}")
+#     else
+#       Candidate.all
+#     end
+#   end
 end

@@ -1,0 +1,28 @@
+<%# binding.pry%>
+<table class="table table-hover" >
+  <tr>
+    <th>User ID</th>
+    <th>First Name</th>
+    <th>Designation</th>
+  </tr>
+ 
+  <% @users.each do |user| %>
+  	<tr id="userRow_<%=user.id%>">
+   		<td><a href="/users/<%= user.id %>"><%=user.id%></td>
+   		<td><%=user.first_name%></td>
+   		<td><%=user&.role&.designation%></td>
+    	<% if is_hr || is_sd %>
+    	<% else %>
+    		<td><%= link_to "Destroy", user,
+                  method: :delete,
+                  data: { confirm: "Are you sure?" }, remote: true %>
+  		<% end%></td>
+  	</tr>
+  <% end %>
+</table>
+ 
+<% flash.each do |type, msg| %>
+  <div class="alert alert-info">
+   <%= msg %>
+  </div>
+<% end %>

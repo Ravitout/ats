@@ -1,14 +1,24 @@
 class UsersController < ApplicationController
   before_action :require_login, except: [:new, :create]
+  
 	def index
-		@users = User.search(params[:search])
+   # @users = User.search(
+   search = params[:q]
+    @users = if search
+      User.joins(:role).where('first_name LIKE :search OR roles.designation LIKE :search', search: "%#{search}%")
+    else
+      User.all
+   end
 	end
+
 	def show 
 		@user = User.find(params[:id])
 	end
+
 	def new
     @user = User.new
   end
+
   def create
     @user = User.new(user_params)
     if @user.save
@@ -17,14 +27,15 @@ class UsersController < ApplicationController
       render :new
     end
   end
-    def edit
-      if is_hr || is_sd
-        flash[:error] = "You must be logged in as admin to access this action"
-        redirect_to users_path
-      else
-        @user = User.find(params[:id])
-      end
+
+  def edit
+    if is_hr || is_sd
+      flash[:error] = "You must be logged in as admin to access this action"
+      redirect_to users_path
+    else
+      @user = User.find(params[:id])
     end
+  end
 
   def update
     @user = User.find(params[:id])
@@ -35,6 +46,7 @@ class UsersController < ApplicationController
       render :edit
     end
   end
+
   def destroy
     @user = User.find(params[:id])
     @user.destroy
@@ -47,7 +59,7 @@ class UsersController < ApplicationController
   end
   private
    def user_params
-      params.require(:user).permit(:first_name, :search ,:last_name, :email, :email_confirmation, :password, :role_id, :password_confirmation, :avatar)
+      params.require(:user).permit(:first_name ,:last_name, :email, :email_confirmation, :password, :role_id, :password_confirmation, :avatar)
    end
 end
 

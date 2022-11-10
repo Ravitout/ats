@@ -5,7 +5,13 @@ class CandidatesController < ApplicationController
   # before_action :is_sd, except: [:new, :create, :show]
 
 	def index
-		@candidates = Candidate.search(params[:search])
+		# @candidates = Candidate.search(params[:search])
+    search = params[:q]
+    @candidates = if search
+      Candidate.where('first_name LIKE :search OR last_name LIKE :search OR current_designation LIKE :search', search: "%#{search}%")
+    else
+      Candidate.all
+   end
 	end
 
 	def show 

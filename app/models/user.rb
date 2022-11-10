@@ -1,6 +1,4 @@
 class User < ApplicationRecord
-  # has_secure_password
-	# has_many :candidates
 	belongs_to :role
   validates :first_name, presence: true
   validates :last_name, presence: true
@@ -11,11 +9,12 @@ class User < ApplicationRecord
   validates :password_confirmation, presence: { message: "must be same as password" }
 
 
-  def self.search(search)
-    if search
-      User.joins(:role).where('first_name LIKE :search OR roles.designation LIKE :search', search: "%#{search}")
-    else
-      User.all
-    end
-  end
+  # def self.search(search)
+  #   if search
+  #     User.joins(:role).where('first_name ILIKE :search OR roles.designation ILIKE :search', search: "%#{search}%")
+  #   else
+  #     User.all
+  #     #scoped
+  #   end
+  # end
 end

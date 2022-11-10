@@ -1,41 +1,26 @@
 <h1>Candidate details</h1>
 <h5>Search</h5>
 <%= form_tag(candidates_path, method: :get) do%>
-<%= text_field_tag(:search, params[:search])%>
-<%= submit_tag("Search")%>
+<%= text_field_tag(:search, params[:search], id: "search_candidates")%>
+<%#= submit_tag("Search")%>
 <%end%>
-<table class="table table-hover">
-  <tr>
-    <th>Candidate ID</th>
-    <th>First Name</th>
-    <th>Last Name</th>
-    <th>Current Designation</th>
-  </tr>
-<!-- </table>
-<table> -->
-  <% @candidates.each do |candidate| %>
-  <tr id="candidateRow_<%=candidate.id%>">
-    <td><a href="/candidates/<%= candidate.id %>">
-        <%= candidate.id %>
-    </a></td>
-    <td><%= candidate.first_name %></td>
-    <td><%= candidate.last_name %></td>
-    <td><%= candidate.current_designation %></td>
-    <% if is_hr || is_sd %>
-    <% else %>
-    <td><%= link_to "Destroy", candidate,
-                  method: :delete,
-                  data: { confirm: "Are you sure?" }, remote: true %>
-    <% end %></td>
-  </tr>
-  <% end %>
-</table>
+
+<div id="candidates_table">
+  <%= render "index"%>
+</div>
+
 <%= link_to "New candidate", new_candidate_path, class:"btn btn-outline-primary" %>
 <%= link_to "Back", users_path, class:"btn btn-outline-primary" %>
-<% flash.each do |type, msg| %>
-  <div class="alert alert-info">
-    <%= msg %>
-  </div>
-<% end %>
 
+<script type="text/javascript">
+  $("#search_candidates").keyup(function(){
+    text = $("#search_candidates").val();
 
+    console.log("ajax called............" + text);
+    $.ajax({
+      type: 'GET',
+      url: "/candidates.js",
+      data: {"q": text}
+    });
+  });
+</script>
