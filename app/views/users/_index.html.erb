@@ -1,9 +1,13 @@
-<%# binding.pry%>
 <table class="table table-hover" >
   <tr>
     <th>User ID</th>
     <th>First Name</th>
     <th>Designation</th>
+    <% if is_hr || is_sd %>
+    <% else %>
+    <th>Delete</th>
+    <th>Login authority</th>
+    <% end%>
   </tr>
  
   <% @users.each do |user| %>
@@ -11,11 +15,11 @@
    		<td><a href="/users/<%= user.id %>"><%=user.id%></td>
    		<td><%=user.first_name%></td>
    		<td><%=user&.role&.designation%></td>
-    	<% if is_hr || is_sd %>
-    	<% else %>
-    		<td><%= link_to "Destroy", user,
+    	<% if is_admin %>
+    		<td><%= link_to "Delete", user,
                   method: :delete,
                   data: { confirm: "Are you sure?" }, remote: true %>
+      <td><%= user.status%></td>
   		<% end%></td>
   	</tr>
   <% end %>
@@ -26,3 +30,4 @@
    <%= msg %>
   </div>
 <% end %>
+

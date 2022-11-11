@@ -7,14 +7,10 @@ class User < ApplicationRecord
   validates :role_id, presence: true, length: { maximum:1 }
   validates :password, format: {with: /\A(?=.*[a-zA-Z])(?=.*[0-9]).{6,}\z/, message: 'need alphabet, numbers and special characters'}, confirmation: true
   validates :password_confirmation, presence: { message: "must be same as password" }
+  enum status: {
+   not_approved: 0, 
+   approved: 1, 
+   declined:2 
+ }
 
-
-  # def self.search(search)
-  #   if search
-  #     User.joins(:role).where('first_name ILIKE :search OR roles.designation ILIKE :search', search: "%#{search}%")
-  #   else
-  #     User.all
-  #     #scoped
-  #   end
-  # end
 end

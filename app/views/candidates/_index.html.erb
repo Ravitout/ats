@@ -15,8 +15,7 @@
     <td><%= candidate.first_name %></td>
     <td><%= candidate.last_name %></td>
     <td><%= candidate.current_designation %></td>
-    <% if is_hr || is_sd %>
-    <% else %>
+    <% if is_admin %>
     <td><%= link_to "Destroy", candidate,
                   method: :delete,
                   data: { confirm: "Are you sure?" }, remote: true %>

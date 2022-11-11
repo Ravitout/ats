@@ -17,21 +17,17 @@ class ApplicationController < ActionController::Base
   	end
 
   	def is_admin
-      # binding.pry
-    	if current_user.role.designation == "Director"
-    		# redirect_to users_path
-    	end
+      current_user.role.designation == "Director"
     end
 
     def is_hr
-        current_user.role.designation == "Human Resource Executive"	
+      current_user.role.designation == "Human Resource Executive"	
   	end
 
   	def is_sd
-  		if current_user.role.designation == "Sr. Software Developer"
-      	# redirect_to candidates_path
-  		end
+  		current_user.role.designation == "Sr. Software Developer"
   	end
+
   	def login_path
   		if is_hr
   			 candidates_path
@@ -39,6 +35,9 @@ class ApplicationController < ActionController::Base
   			root_path
   		end
   	end
+
+    def avboii
+    end
 
   	def require_login
     	if current_user == nil

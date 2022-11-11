@@ -1,9 +1,9 @@
 class CandidatesController < ApplicationController
   before_action :require_login, except: [:new, :create, :show]
   # before_action :is_admin, except: [:new, :create, :show]
-  before_action :is_hr, only: [:new, :create, :show]
-  # before_action :is_sd, except: [:new, :create, :show]
-
+  # before_action :is_hr, except: [:edit]
+  # before_action :is_sd, only: [:new, :create, :show]
+  before_action :restrict, only: [:edit ]
 	def index
 		# @candidates = Candidate.search(params[:search])
     search = params[:q]
@@ -37,7 +37,7 @@ class CandidatesController < ApplicationController
   end
 
   def edit
-    @candidate = Candidate.find(params[:id])
+    @candidate =  Candidate.find(params[:id])
   end
 
   def update
@@ -64,4 +64,10 @@ class CandidatesController < ApplicationController
     def candidate_params
       params.require(:candidate).permit(:first_name, :search, :last_name, :avatar, :email, :current_location, :experience, :current_designation, :availability_for_joining)
     end
+
+    def restrict
+      redirect_to root_path unless current_user.role.designation == "Director"
+      flash[:notice] = "You need to be admin to edit. Please login as one"
+    end
+
 end
