@@ -28,9 +28,8 @@
 <% if is_hr || is_sd %>
 <% else %>
     <%= link_to "Edit", edit_candidate_path(@candidate) , class:"btn btn-outline-primary"%>
-    <%= link_to "Destroy", candidate_path(@candidate), class:"btn btn-outline-primary",
-                  method: :delete,
+    <%= link_to "Destroy", candidate_path(@candidate), class:"btn btn-outline-primary",           method: :delete,
                   data: { confirm: "Are you sure?" } %>
-  <% end %>
+<% end %>
 
 <%= link_to "Back", candidates_path , class:"btn btn-outline-primary"%>

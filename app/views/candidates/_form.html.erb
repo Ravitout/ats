@@ -1,65 +1,71 @@
 <%= form_with model: @candidate do |form| %>
 <div class="card">
   <div class="card-body">
-  <div class="mb-3">
-    <%= form.label :first_name, { class: "form-label"} %><br>
-    <%= form.text_field :first_name, { class: "form-control" } %>
-    <% @candidate.errors.full_messages_for(:first_name).each do |message| %>
-      <div><%= message %></div>
-    <% end %>
-  </div>
-
-  <div>
-    <%= form.label :last_name, { class: "form-label"} %><br>
-    <%= form.text_field :last_name, { class: "form-control" } %>
-    <% @candidate.errors.full_messages_for(:last_name).each do |message| %>
-      <div><%= message %></div>
-    <% end %>
-  </div>
-  <div>
-    <%= form.label :email, { class: "form-label"} %><br>
-    <%= form.text_field :email, { class: "form-control" } %>
-    <% @candidate.errors.full_messages_for(:email).each do |message| %>
-      <div><%= message %></div>
-    <% end %>
-  </div>
-  <div>
-    <%= form.label :current_location, { class: "form-label"} %><br>
-    <%= form.text_field :current_location, { class: "form-control" } %>
-    <% @candidate.errors.full_messages_for(:current_location).each do |message| %>
-      <div><%= message %></div>
-    <% end %>
-  </div>
-  <div>
-    <%= form.label :experience, { class: "form-label"}%><br>
-    <%= form.text_field :experience, { class: "form-control" } %>
-    <% @candidate.errors.full_messages_for(:experience).each do |message| %>
-      <div><%= message %></div>
-    <% end %>
-  </div>
-  <div>
-    <%= form.label :current_designation, { class: "form-label"} %><br>
-    <%= form.text_field :current_designation, { class: "form-control" } %>
-    <% @candidate.errors.full_messages_for(:current_designation).each do |message| %>
-      <div><%= message %></div>
-    <% end %>
-  </div>
-  <div>
-    <%= form.label :availability_for_joining, { class: "form-label"} %><br>
-    <%= form.date_field :availability_for_joining, attribute: 'date' %>
-
-    <% @candidate.errors.full_messages_for(:availability_for_joining).each do |message| %>
-      <div><%= message %></div>
-    <% end %>
-  </div>
-
-  <div>
-    <%= form.file_field :avatar %>
-  </div>
-  <div>
     
-    <%= form.submit %>
+    <div class="mb-3">
+      <%= form.label :first_name, { class: "form-label"} %><br>
+      <%= form.text_field :first_name, { class: "form-control" } %>
+      <% @candidate.errors.full_messages_for(:first_name).each do |message| %>
+        <div><%= message %></div>
+      <% end %>
+    </div>
+
+    <div>
+      <%= form.label :last_name, { class: "form-label"} %><br>
+      <%= form.text_field :last_name, { class: "form-control" } %>
+      <% @candidate.errors.full_messages_for(:last_name).each do |message| %>
+        <div><%= message %></div>
+      <% end %>
+    </div>
+
+    <div>
+      <%= form.label :email, { class: "form-label"} %><br>
+      <%= form.text_field :email, { class: "form-control" } %>
+      <% @candidate.errors.full_messages_for(:email).each do |message| %>
+        <div><%= message %></div>
+      <% end %>
+    </div>
+
+    <div>
+      <%= form.label :current_location, { class: "form-label"} %><br>
+      <%= form.text_field :current_location, { class: "form-control" } %>
+      <% @candidate.errors.full_messages_for(:current_location).each do |message| %>
+        <div><%= message %></div>
+      <% end %>
+    </div>
+
+    <div>
+      <%= form.label :experience, { class: "form-label"}%><br>
+      <%= form.text_field :experience, { class: "form-control" } %>
+      <% @candidate.errors.full_messages_for(:experience).each do |message| %>
+        <div><%= message %></div>
+      <% end %>
+    </div>
+
+    <div>
+      <%= form.label :current_designation, { class: "form-label"} %><br>
+      <%= form.text_field :current_designation, { class: "form-control" } %>
+      <% @candidate.errors.full_messages_for(:current_designation).each do |message| %>
+        <div><%= message %></div>
+      <% end %>
+    </div>
+
+    <div>
+      <%= form.label :availability_for_joining, { class: "form-label"} %><br>
+      <%= form.date_field :availability_for_joining, attribute: 'date' %>
+
+      <% @candidate.errors.full_messages_for(:availability_for_joining).each do |message| %>
+        <div><%= message %></div>
+      <% end %>
+    </div>
+
+    <div>
+      <%= form.file_field :avatar %>
+    </div>
+
+    <div>
+      <%= form.submit %>
+    </div>
   </div>
-</div>
 </div>
 <% end %>

@@ -25,12 +25,9 @@ class CandidatesController < ApplicationController
 
   def create
     @candidate = Candidate.new(candidate_params)
-    # redirect_to message
-    
     # binding.pry
     if @candidate.save
       redirect_to @candidate
-      # render :show
     else  
       render :new
     end
@@ -50,14 +47,14 @@ class CandidatesController < ApplicationController
   end
 
   def destroy
-      @candidate = Candidate.find(params[:id])
-      @candidate.destroy
-      # redirect_to candidates_path
-      respond_to do |format|   
-        format.html { redirect_to candidate_url, notice: "Candidate was Deleted" }   
-        format.json { head :no_content }   
-        format.js 
-      end
+    @candidate = Candidate.find(params[:id])
+    @candidate.destroy
+    # redirect_to candidates_path
+    respond_to do |format|   
+      format.html { redirect_to candidate_url, notice: "Candidate was Deleted" }   
+      format.json { head :no_content }   
+      format.js 
+    end
   end
 
   private
@@ -69,5 +66,4 @@ class CandidatesController < ApplicationController
       redirect_to root_path unless current_user.role.designation == "Director"
       flash[:notice] = "You need to be admin to edit. Please login as one"
     end
-
 end

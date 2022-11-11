@@ -9,9 +9,11 @@
   <div>
     <%= form.label :password %><br>
     <%= form.text_field :password , {required: "required"}%>
+  </div>
   <div>
     <%= form.submit %>
   </div>
+
   <div>
   <%= link_to "Log out", logout_path, method: :delete %>  
   </div>

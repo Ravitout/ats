@@ -2,7 +2,6 @@ class UsersController < ApplicationController
   before_action :require_login, except: [:new, :create]
   before_action :restrict, only: [:edit ]
 
-  
 	def index
    # @users = User.search(
    search = params[:q]
@@ -42,7 +41,6 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-
     if @user.update(user_params)
       redirect_to @user
     else
@@ -53,17 +51,17 @@ class UsersController < ApplicationController
   def destroy
     @user = User.find(params[:id])
     @user.destroy
-    # redirect_to users_path
     respond_to do |format|   
       format.html { redirect_to user_url, flash[:error] = "User was Deleted" }   
       format.json { head :no_content }   
       format.js 
     end
   end
+
   private
-   def user_params
+    def user_params
       params.require(:user).permit(:first_name ,:last_name, :email, :email_confirmation, :password, :role_id, :password_confirmation, :avatar)
-   end
+    end
     def approval
       if Candidate.find(params[:id]).status == 1
         flash[:notice] = "Your request is approved you can login"
@@ -74,6 +72,7 @@ class UsersController < ApplicationController
       end
       render "sign_in"
     end
+    
     def restrict
       redirect_to root_path unless current_user.role.designation == "Director"
       flash[:notice] = "You need to be admin to edit. Please login as one"
