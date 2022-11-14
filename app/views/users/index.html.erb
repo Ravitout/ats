@@ -8,11 +8,10 @@
 <div id="users_table">
   <%= render "index"%>
 </div>
-
-<%= link_to "New user", new_user_path , class:"btn btn-outline-primary"%>
-<%= link_to "Existing user", sign_in_path , class:"btn btn-outline-primary"%>
+<%#= link_to "New user", new_user_path , class:"btn btn-outline-primary"%>
+<%#= link_to "Existing user", sign_in_path , class:"btn btn-outline-primary"%>
 <%= link_to "Search Canidates", candidates_path , class:"btn btn-outline-primary"%>
-
+<%= link_to "Home", root_path , class:"btn btn-outline-primary"%>
 
 <script type="text/javascript">
   $("#search_users").keyup(function(){

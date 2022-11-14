@@ -1,10 +1,13 @@
 class UsersController < ApplicationController
   before_action :require_login, except: [:new, :create]
   before_action :restrict, only: [:edit ]
-
+  before_action :logged_in, except: [:index, :show, :edit, :update, :destroy]
 	def index
    # @users = User.search(
    search = params[:q]
+   if require_login
+    redirect_to root_path
+   end
     @users = if search
       User.joins(:role).where('first_name LIKE :search OR roles.designation LIKE :search', search: "%#{search}%")
     else
@@ -75,7 +78,9 @@ class UsersController < ApplicationController
     
     def restrict
       redirect_to root_path unless current_user.role.designation == "Director"
-      flash[:notice] = "You need to be admin to edit. Please login as one"
+      if !is_admin
+        flash[:notice] = "You need to be admin to edit. Please login as one"
+      end
     end
 end
 

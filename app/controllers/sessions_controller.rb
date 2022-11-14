@@ -1,13 +1,11 @@
 class SessionsController < ApplicationController
-  # before_action :require_login, except: [:new, :create, :destroy]
-  # before_action :is_admin, except: [:new, :create, :destroy]
-  # before_action :is_hr, except: [:new, :create, :destroy]
-  # before_action :is_sd, except: [:new, :create, :destroy]
-   # after_action :login_path, only:[:create]
+# before_action :logged_in, except: [:destroy]
+
   def new
+    # binding.pry
     @user = User.new  
   end
-
+  
   def create
     if session[:user_id] != nil
       flash[:notice] = "please logout first"
@@ -33,15 +31,18 @@ class SessionsController < ApplicationController
       end
     end
   end
+    def dashboard
+      
+    end
 
   def destroy
     session[:user_id] = nil
     redirect_to root_path, notice: "logged out"
   end
 
-
   private
     def user_params
       params.require(:user).permit(:email, :password)
     end
+
 end

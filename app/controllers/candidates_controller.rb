@@ -1,11 +1,12 @@
 class CandidatesController < ApplicationController
   before_action :require_login, except: [:new, :create, :show]
-  # before_action :is_admin, except: [:new, :create, :show]
-  # before_action :is_hr, except: [:edit]
-  # before_action :is_sd, only: [:new, :create, :show]
   before_action :restrict, only: [:edit ]
+  
 	def index
 		# @candidates = Candidate.search(params[:search])
+    if require_login
+      redirect_to root_path
+    end
     search = params[:q]
     @candidates = if search
       Candidate.where('first_name LIKE :search OR last_name LIKE :search OR current_designation LIKE :search', search: "%#{search}%")

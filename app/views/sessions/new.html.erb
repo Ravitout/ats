@@ -8,16 +8,16 @@
   
   <div>
     <%= form.label :password %><br>
-    <%= form.text_field :password , {required: "required"}%>
+     <input type="password"<%= form.text_field :password , {required: "required"}%>
   </div>
   <div>
     <%= form.submit %>
   </div>
-
+  <% if current_user%>
   <div>
-  <%= link_to "Log out", logout_path, method: :delete %>  
+  <%= link_to "Log out", logout_path, method: :delete , class:"btn btn-outline-primary"%>  
   </div>
-
+  <%end%>
 
   <% flash.each do |type, msg| %>
     <div class="alert alert-info">
@@ -25,5 +25,6 @@
     </div>
   <% end %>
 <% end %>
-<%= link_to "New user?", new_user_path %></br>
-<%= link_to "Apply for jobs", new_candidate_path %>
+<%= link_to "New user?", new_user_path , class:"btn btn-outline-primary"%>
+<%= link_to "Apply for jobs", new_candidate_path , class:"btn btn-outline-primary"%>
+<%= link_to "Home", root_path , class:"btn btn-outline-primary"%>

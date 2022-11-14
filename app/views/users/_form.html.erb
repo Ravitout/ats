@@ -50,7 +50,7 @@
 
     <div class="mb-3">
       <%= form.label :password, { class: "form-label"} %><br>
-      <%= form.text_field :password , { class: "form-control" }%>
+      <input type="password"<%= form.text_field :password , { class: "form-control" }%>
       <% @user.errors.full_messages_for(:password).each do |message| %>
         <div><%= message %></div>
       <% end %>
@@ -58,7 +58,7 @@
 
     <div class="mb-3">
       <%= form.label :password_confirmation , { class: "form-label"}%><br>
-      <%= form.text_field :password_confirmation , { class: "form-control" }%>
+      <input type="password"  <%= form.text_field :password_confirmation , { class: "form-control" }%>
       <% @user.errors.full_messages_for(:password_confirmation).each do |message| %>
         <div><%= message %></div>
       <% end %>
