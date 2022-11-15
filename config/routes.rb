@@ -7,5 +7,6 @@ root "candidates#dashboard"
   post   'sign_in', to: 'sessions#create'
   delete 'logout', to: 'sessions#destroy'
   get 'dashboard', to: 'candidates#dashboard'
-  # get 'approval', to: 'users#approval'
+  # post '/approval/:id', to: 'users#approval', as: "approved"  
+  get 'approval/:id', to: 'users#approval'
 end

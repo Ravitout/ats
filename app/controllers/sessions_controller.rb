@@ -1,6 +1,5 @@
 class SessionsController < ApplicationController
-# before_action :logged_in, except: [:destroy]
-
+  after_action :status_check
   def new
     # binding.pry
     @user = User.new  
@@ -12,6 +11,7 @@ class SessionsController < ApplicationController
       render :new
     else
       user = User.find_by(email: params[:email])
+      # binding.pry
         if user.present? && user.email == params[:email] 
           password = user.password
           if password == params[:password]
@@ -44,5 +44,17 @@ class SessionsController < ApplicationController
     def user_params
       params.require(:user).permit(:email, :password)
     end
-
+    
+    def status_check
+      if current_user
+        if current_user.status == "stat_pending"
+          session[:user_id] = nil
+          # binding.pry
+          flash[:error] = "Your request is under process"
+          elsif current_user.status == "stat_declined"
+          flash[:notice] = "Your request is denied by Admin"
+          current_user = nil
+        end
+      end
+    end
 end

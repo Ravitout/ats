@@ -8,9 +8,16 @@ class User < ApplicationRecord
   validates :password, format: {with: /\A(?=.*[a-zA-Z])(?=.*[0-9]).{6,}\z/, message: 'need alphabet, numbers and special characters'}, confirmation: true
   validates :password_confirmation, presence: { message: "must be same as password" }
   enum status: {
-    not_approved: 0, 
-    approved: 1, 
-    declined:2 
+    stat_pending: 0, 
+    stat_approved: 1, 
+    stat_declined:2 
   }
-
+    def approval
+     current_user.update(status: 1)
+    end
+    
+    def decline
+      current_user.update(status: 2)
+    end
 end
+

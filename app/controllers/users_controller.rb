@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   before_action :require_login, except: [:new, :create]
   before_action :restrict, only: [:edit ]
   before_action :logged_in, except: [:index, :show, :edit, :update, :destroy]
+  # before_action :status_check
 	def index
    # @users = User.search(
    search = params[:q]
@@ -65,22 +66,24 @@ class UsersController < ApplicationController
     def user_params
       params.require(:user).permit(:first_name ,:last_name, :email, :email_confirmation, :password, :role_id, :password_confirmation, :avatar)
     end
-    def approval
-      if Candidate.find(params[:id]).status == 1
-        flash[:notice] = "Your request is approved you can login"
-      elsif Candidate.find(params[:id]).status == 2
-        flash[:notice] = "Your registration request has been denied"
-      else
-        flash[:notice] = "Your request has been sent to admin for approval"
-      end
-      render "sign_in"
-    end
     
     def restrict
       redirect_to root_path unless current_user.role.designation == "Director"
       if !is_admin
         flash[:notice] = "You need to be admin to edit. Please login as one"
       end
+    end
+
+    def approval
+      @selected_user = User.find(params[:id])
+      @selected_user.update(status: 1)
+      flash[:notice] = "Request Approved"
+    end
+
+    def decline
+      @selected_user = User.find(params[:id])
+      @selected_user.update(status: 2)
+      flash[:notice] = "Request Denied"
     end
 end
 

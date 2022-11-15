@@ -20,6 +20,16 @@
                   method: :delete,
                   data: { confirm: "Are you sure?" }, remote: true %>
       <td><%= user.status%></td>
+      <% if user.status !=  "stat_approved"%>
+       <td><a href="/approval/:id"><%= link_to "Approve",user, remote: true,
+                  data: { confirm: "Are you sure?" }%></a>
+                    <%#= user.hidden_field :status, :value => 1 %>
+                  &nbsp&nbsp&nbsp
+        <%= link_to "Decline", method: :decline,
+                  data: { confirm: "Are you sure?" }%></td>
+        <%#= form_for(user, remote: true, data: { confirm: "Are you sure?" }, do |u|)%>
+        <%#= u.hidden_field :status, value => 1%>
+      <% end%>
   		<% end%></td>
   	</tr>
   <% end %>
