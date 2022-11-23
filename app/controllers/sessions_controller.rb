@@ -47,12 +47,12 @@ class SessionsController < ApplicationController
     
     def status_check
       if current_user
-        if current_user.status == "stat_pending"
-          session[:user_id] = nil
-          # binding.pry
+        if @current_user.status == "stat_pending"
+          binding.pry
           flash[:error] = "Your request is under process"
-          elsif current_user.status == "stat_declined"
-          flash[:notice] = "Your request is denied by Admin"
+          session[:user_id] = nil
+          elsif @current_user.status == "stat_declined"
+          flash[:error] = "Your request is denied by Admin"
           current_user = nil
         end
       end

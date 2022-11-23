@@ -1,8 +1,8 @@
 class UsersController < ApplicationController
   before_action :require_login, except: [:new, :create]
   before_action :restrict, only: [:edit ]
-  before_action :logged_in, except: [:index, :show, :edit, :update, :destroy]
-  # before_action :status_check
+  before_action :logged_in, except: [:index, :show, :edit, :update, :destroy, :approval, :decline]
+  after_action :status_check
 	def index
    # @users = User.search(
    search = params[:q]
@@ -62,28 +62,43 @@ class UsersController < ApplicationController
     end
   end
 
-  private
-    def user_params
-      params.require(:user).permit(:first_name ,:last_name, :email, :email_confirmation, :password, :role_id, :password_confirmation, :avatar)
-    end
-    
-    def restrict
-      redirect_to root_path unless current_user.role.designation == "Director"
-      if !is_admin
-        flash[:notice] = "You need to be admin to edit. Please login as one"
+  def approval
+    @selected_user = User.find(params[:id])
+    @selected_user.stat_approved!
+    redirect_to users_path
+    flash[:notice] = "Request Approved"
+  end
+
+  def decline
+    @selected_user = User.find(params[:id])
+    @selected_user.stat_declined!
+    redirect_to users_path
+    flash[:notice] = "Request Denied"
+  end
+      def status_check
+      if current_user
+        if current_user.status == "stat_pending"
+          session[:user_id] = nil
+          # binding.pry
+          flash[:error] = "Your request is under process"
+          elsif current_user.status == "stat_declined"
+          flash[:notice] = "Your request is denied by Admin"
+          current_user = nil
+        end
       end
     end
-
-    def approval
-      @selected_user = User.find(params[:id])
-      @selected_user.update(status: 1)
-      flash[:notice] = "Request Approved"
+  private
+  def user_params
+    params.require(:user).permit(:first_name ,:last_name, :email, :email_confirmation, :password, :role_id, :password_confirmation, :avatar)
+  end
+  
+  def restrict
+    redirect_to root_path unless current_user.role.designation == "Director"
+    if !is_admin
+      flash[:notice] = "You need to be admin to edit. Please login as one"
     end
+  end
 
-    def decline
-      @selected_user = User.find(params[:id])
-      @selected_user.update(status: 2)
-      flash[:notice] = "Request Denied"
-    end
+
 end
 
