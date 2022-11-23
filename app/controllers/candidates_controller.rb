@@ -57,6 +57,10 @@ class CandidatesController < ApplicationController
       format.js 
     end
   end
+  
+  def dashboard
+    
+  end
 
   private
     def candidate_params

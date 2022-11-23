@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   # before_action :status_check
-  before_action :require_login, except: [:new, :create, :show]
+  
   helper_method :is_admin
   helper_method :is_hr
   helper_method :is_sd
@@ -14,6 +14,7 @@ class ApplicationController < ActionController::Base
   end
 
   def is_admin
+    # binding.pry
     current_user.role.director?
   end
 
@@ -42,7 +43,7 @@ class ApplicationController < ActionController::Base
 
   def require_login
   	if current_user == nil
-    	flash[:error] = "You must be logged in to access this section"
+    	# flash[:error] = "You must be logged in to access this section"
     	# redirect_to sign_in_url
     else
   	end

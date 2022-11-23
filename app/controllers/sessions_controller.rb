@@ -1,11 +1,12 @@
 class SessionsController < ApplicationController
-  after_action :status_check
+  # after_action :status_check
   def new
     # binding.pry
     @user = User.new  
   end
   
   def create
+    # binding.pry
     if session[:user_id] != nil
       flash[:notice] = "please logout first"
       render :new
@@ -15,6 +16,11 @@ class SessionsController < ApplicationController
         if user.present? && user.email == params[:email] 
           password = user.password
           if password == params[:password]
+            if ["stat_pending", "stat_declined"].include?(user.status)
+              flash[:error] = user.status == "stat_pending" ? "Your request is under process" : "Your request is denied by Admin"
+              redirect_to root_path
+              return
+            end
             session[:user_id] = user.id
             if is_admin
               flash[:notice] = "Admin logged in"
@@ -31,9 +37,7 @@ class SessionsController < ApplicationController
       end
     end
   end
-    def dashboard
-      
-    end
+
 
   def destroy
     session[:user_id] = nil
@@ -45,16 +49,22 @@ class SessionsController < ApplicationController
       params.require(:user).permit(:email, :password)
     end
     
-    def status_check
-      if current_user
-        if @current_user.status == "stat_pending"
-          binding.pry
-          flash[:error] = "Your request is under process"
-          session[:user_id] = nil
-          elsif @current_user.status == "stat_declined"
-          flash[:error] = "Your request is denied by Admin"
-          current_user = nil
-        end
-      end
+    # def status_check
+    #   if current_user
+    #   if @current_user.status == "stat_pending"
+    #     binding.pry
+    #     flash[:error] = "Your request is under process"
+    #     flash.now
+    #     session[:user_id] = nil
+    #   elsif @current_user.status == "stat_declined"
+    #     binding.pry
+    #     flash.now[:error] = "Your request is denied by Admin"
+    #     session[:user_id] = nil
+    #   end
+    #   end
+    # end
+
+    def set_current_user
+      @current_user ||= User.find_by(id: session[:user_id])
     end
 end

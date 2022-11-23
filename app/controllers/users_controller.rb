@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_action :require_login, except: [:new, :create]
   before_action :restrict, only: [:edit ]
   before_action :logged_in, except: [:index, :show, :edit, :update, :destroy, :approval, :decline]
-  after_action :status_check
+  # before_action :status_check
 	def index
    # @users = User.search(
    search = params[:q]
@@ -75,18 +75,7 @@ class UsersController < ApplicationController
     redirect_to users_path
     flash[:notice] = "Request Denied"
   end
-      def status_check
-      if current_user
-        if current_user.status == "stat_pending"
-          session[:user_id] = nil
-          # binding.pry
-          flash[:error] = "Your request is under process"
-          elsif current_user.status == "stat_declined"
-          flash[:notice] = "Your request is denied by Admin"
-          current_user = nil
-        end
-      end
-    end
+  
   private
   def user_params
     params.require(:user).permit(:first_name ,:last_name, :email, :email_confirmation, :password, :role_id, :password_confirmation, :avatar)

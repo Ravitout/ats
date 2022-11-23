@@ -11,9 +11,9 @@
     <td><a href="/candidates/<%= candidate.id %>">
         <%= candidate.id %>
     </a></td>
-    <td><%= candidate.first_name %></td>
-    <td><%= candidate.last_name %></td>
-    <td><%= candidate.current_designation %></td>
+    <td><%= candidate&.first_name %></td>
+    <td><%= candidate&.last_name %></td>
+    <td><%= candidate&.current_designation %></td>
     <% if is_admin %>
     <td><%= link_to "Destroy", candidate,
                   method: :delete,
