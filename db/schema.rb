@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_11_075508) do
+ActiveRecord::Schema.define(version: 2022_11_25_083354) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -40,6 +40,12 @@ ActiveRecord::Schema.define(version: 2022_11_11_075508) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "candidate_references", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "candidates", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
@@ -51,6 +57,9 @@ ActiveRecord::Schema.define(version: 2022_11_11_075508) do
     t.string "resume"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "security_question"
+    t.string "security_answer"
+    t.integer "candidate_reference_id", default: 3, null: false
   end
 
   create_table "roles", force: :cascade do |t|

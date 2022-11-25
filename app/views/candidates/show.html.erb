@@ -6,6 +6,7 @@
     <th>Last Name</th>
     <th>Current Designation</th>
     <th>Experience</th>
+    <th>Email</th>
     <th>Availability</th>
     <th>Current location</th>
     <th>Resume</th>
@@ -19,12 +20,15 @@
     <td><%= @candidate.last_name %></td>
     <td><%= @candidate.current_designation %></td>
     <td><%= @candidate.experience %></td>
+    <td><%= @candidate.email%></td>
     <td><%= @candidate.availability_for_joining %></td>
     <td><%= @candidate.current_location %></td>
     <td><%=link_to 'download', rails_blob_path(@candidate.avatar, disposition: "attachment")%></td>
     <td><%=link_to 'preview', rails_blob_path(@candidate.avatar, disposition: "preview"), target: '_blank'%></td>
   </tr>
 </table>
+<p>Security Question :-> <%= @candidate.security_question %></p>
+<p>Security Answer :-> <%= @candidate.security_answer %></p>
 <% if is_hr || is_sd %>
 <% else %>
     <%= link_to "Edit", edit_candidate_path(@candidate) , class:"btn btn-outline-primary"%>

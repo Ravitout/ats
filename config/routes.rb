@@ -9,4 +9,6 @@ root "candidates#dashboard"
   get 'dashboard', to: 'candidates#dashboard'
   get 'approve/:id', to: 'users#approval', as: :approved
   get 'decline/:id', to: 'users#decline', as: :declined
+  get 'probing', to: 'candidates#probing', as: :probing
+  post 'probing', to: 'candidates#modify' 
 end

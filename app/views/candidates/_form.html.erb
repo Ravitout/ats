@@ -53,19 +53,43 @@
     <div>
       <%= form.label :availability_for_joining, { class: "form-label"} %><br>
       <%= form.date_field :availability_for_joining, attribute: 'date' %>
-
       <% @candidate.errors.full_messages_for(:availability_for_joining).each do |message| %>
         <div><%= message %></div>
       <% end %>
     </div>
+    &nbsp
+    <div>
+      <%= form.label :security_question , { class: "form-label"}%><br>
+      <%= form.select :security_question,["What is your birthplace","Name of your first vehicle", "Who is your favorite relative"],{ class:"form-select form-select-lg mb-3" } %>
+      <% @candidate.errors.full_messages_for(:security_answer).each do |message| %>
+        <div><%= message %></div>
+      <% end %>
+    </div> 
+    
+    <div>
+      <%= form.text_field :security_answer, { class: "form-control" } %>
+      <% @candidate.errors.full_messages_for(:security_answer).each do |message| %>
+        <div><%= message %></div>
+      <% end %>
+    </div>
+    &nbsp
+    <div>
+      <%= form.label :candidate_reference_id , { class: "form-label"}%><br>
+      <%= form.select :candidate_reference_id, CandidateReference.all.pluck(:name, :id ),{ class:"form-select form-select-lg mb-3" } %>
+      <% @candidate.errors.full_messages_for(:candidate_reference_id).each do |message| %>
+        <div><%= message %></div>
+      <% end %>
+    </div> 
 
+      &nbsp
     <div>
       <%= form.file_field :avatar %>
     </div>
-
+    &nbsp
     <div>
       <%= form.submit %>
     </div>
+    
   </div>
 </div>
 <% end %>

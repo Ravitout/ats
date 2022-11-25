@@ -12,11 +12,5 @@ class User < ApplicationRecord
     stat_approved: 1, 
     stat_declined:2 
   }
-
-# def old_user
-#  @user = User.find_by(user_params[:id])
-#  @user.update!
-# end
-
 end
 

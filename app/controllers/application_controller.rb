@@ -1,12 +1,10 @@
 class ApplicationController < ActionController::Base
-  # before_action :status_check
-  
   helper_method :is_admin
   helper_method :is_hr
   helper_method :is_sd
   helper_method :current_user
   helper_method :logged_in
-
+  helper_method :require_login
 
   def current_user
     # binding.pry
@@ -26,14 +24,6 @@ class ApplicationController < ActionController::Base
   	current_user.role.sd?
   end
 
-  # def login_path
-  # 	if is_hr
-  # 		 # candidates_path
-  # 	else
-  # 		root_path
-  # 	end
-  # end
-
   def logged_in
     if current_user
      flash[:error] = "already logged in"
@@ -43,7 +33,7 @@ class ApplicationController < ActionController::Base
 
   def require_login
   	if current_user == nil
-    	# flash[:error] = "You must be logged in to access this section"
+    	flash[:error] = "You must be logged in to access this section"
     	# redirect_to sign_in_url
     else
   	end

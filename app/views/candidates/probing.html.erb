@@ -1,0 +1,25 @@
+<h3>Account Varification</h3>
+&nbsp
+<%= form_with model: @candidate do |form| %>
+  <div>
+    <%= form.label :Enter_your_email %><br>
+    <%= form.text_field :email %>
+  </div>
+    <div>
+      <%= form.label :security_question , { class: "form-label"}%><br>
+      <%= form.select :security_question,["What is your birthplace","Name of your first vehicle", "Who is your favorite relative"],{ class:"form-select form-select-lg mb-3" } %> 
+    </div> 
+
+    <div>
+      <%= form.text_field :security_answer, { class: "form-control" } %>
+    </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% flash.each do |type, msg| %>
+  <div class="alert alert-info">
+   <%= msg %>
+  </div>
+<% end%>
+<%end%>

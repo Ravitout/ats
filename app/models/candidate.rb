@@ -1,5 +1,6 @@
 class Candidate < ApplicationRecord
 	has_one_attached :avatar
+	belongs_to :candidate_reference
 	validates :first_name, presence: true
 	validates :last_name, presence: true
 	validates :email, presence: true, email:true
@@ -8,12 +9,4 @@ class Candidate < ApplicationRecord
 	validates :current_designation, presence: true
 	validates :availability_for_joining, presence: true
 	validates :avatar, presence:true
-
-# 	def self.search(search)
-#     if search
-#       self.where('first_name LIKE :search OR last_name LIKE :search OR current_designation LIKE :search', search: "%#{search}")
-#     else
-#       Candidate.all
-#     end
-#   end
 end

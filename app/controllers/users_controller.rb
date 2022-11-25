@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_action :require_login, except: [:new, :create]
   before_action :restrict, only: [:edit ]
   before_action :logged_in, except: [:index, :show, :edit, :update, :destroy, :approval, :decline]
-  # before_action :status_check
+
 	def index
    # @users = User.search(
    search = params[:q]
@@ -87,7 +87,5 @@ class UsersController < ApplicationController
       flash[:notice] = "You need to be admin to edit. Please login as one"
     end
   end
-
-
 end
 
