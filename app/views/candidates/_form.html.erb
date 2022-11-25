@@ -1,3 +1,5 @@
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <%= form_with model: @candidate do |form| %>
 <div class="card">
   <div class="card-body">
@@ -75,7 +77,7 @@
     &nbsp
     <div>
       <%= form.label :candidate_reference_id , { class: "form-label"}%><br>
-      <%= form.select :candidate_reference_id, CandidateReference.all.pluck(:name, :id ),{ class:"form-select form-select-lg mb-3" } %>
+      <%= form.select :candidate_reference_id, CandidateReference.all.pluck(:name, :id ),{ class:"form-select form-select-lg mb-3 urvashi" } %>
       <% @candidate.errors.full_messages_for(:candidate_reference_id).each do |message| %>
         <div><%= message %></div>
       <% end %>
@@ -93,3 +95,11 @@
   </div>
 </div>
 <% end %>
+
+<script>
+$(document).ready(function() {
+    $('#candidate_candidate_reference_id').select2({
+      minimumInputLength: 3
+    });
+});
+</script>

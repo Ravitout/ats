@@ -5,6 +5,7 @@
     <th>Last Name</th>
     <th>Current Designation</th>
     <th>Reference</th>
+    <th>Interview status</th>
   </tr>
   
   <% @candidates.each do |candidate| %>
@@ -16,6 +17,7 @@
     <td><%= candidate&.last_name %></td>
     <td><%= candidate&.current_designation %></td>
     <td><%= candidate.candidate_reference.name%></td>
+    <td><%= candidate.status%></td>
     <% if is_admin %>
     <td><%= link_to "Destroy", candidate,
                   method: :delete,

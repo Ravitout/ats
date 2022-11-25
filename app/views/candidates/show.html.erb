@@ -27,8 +27,20 @@
     <td><%=link_to 'preview', rails_blob_path(@candidate.avatar, disposition: "preview"), target: '_blank'%></td>
   </tr>
 </table>
-<p>Security Question :-> <%= @candidate.security_question %></p>
-<p>Security Answer :-> <%= @candidate.security_answer %></p>
+<table  class="table table-hover">
+  <tr>
+    <th>Security Question</th>
+    <th>Security Answer</th>
+    <th>Reference</th>
+    <th>Interview status</th>
+  </tr>
+<tr>
+<td> <%= @candidate.security_question %></td>
+<td><%= @candidate.security_answer %></td>
+<td><%= @candidate.candidate_reference.name%></td>
+<td><%= @candidate.status%></td>
+</tr>
+</table>
 <% if is_hr || is_sd %>
 <% else %>
     <%= link_to "Edit", edit_candidate_path(@candidate) , class:"btn btn-outline-primary"%>
