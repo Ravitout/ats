@@ -76,13 +76,20 @@
     </div>
     &nbsp
     <div>
-      <%= form.label :candidate_reference_id , { class: "form-label"}%><br>
-      <%= form.select :candidate_reference_id, CandidateReference.all.pluck(:name, :id ),{ class:"form-select form-select-lg mb-3 urvashi" } %>
+      <%= form.label :candidate_reference_id , { class: "form-label"}%>
+      <%= form.select :candidate_reference_id, CandidateReference.all.pluck(:name, :id ),{ class:"form-select form-select-lg mb-3" } %>
       <% @candidate.errors.full_messages_for(:candidate_reference_id).each do |message| %>
         <div><%= message %></div>
       <% end %>
     </div> 
-
+    &nbsp  
+    <% if current_user%>
+    <div>
+      <%= form.label :status , { class: "form-label"}%>      
+      <%= form.select :status,["applied","interview
+    ", "hold", "clear", "rejected"],{ class:"form-select form-select-lg mb-3" } %>
+    </div>
+    <%end%>
       &nbsp
     <div>
       <%= form.file_field :avatar %>

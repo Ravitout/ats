@@ -1,6 +1,8 @@
 class CandidatesController < ApplicationController
   before_action :require_login, except: [:new, :create, :dashboard, :edit, :modify, :update, :probing]
-  # before_action :restrict, only: [:edit ]
+  before_action :status_update_check, only: [:create, :modify]
+  before_action :change_update_date, only: [:update]
+  before_action :restrict, only: [:edit ]
   
 	def index
     if require_login
@@ -8,7 +10,7 @@ class CandidatesController < ApplicationController
     end
     search = params[:q]
     @candidates = if search
-      Candidate.joins(:candidate_reference).where('first_name LIKE :search OR last_name LIKE :search OR current_designation LIKE :search OR candidate_references.name LIKE :search', search: "%#{search}%")
+      Candidate.joins(:candidate_reference).where('first_name LIKE :search OR last_name LIKE :search OR current_designation LIKE :search OR candidate_references.name LIKE :search OR status LIKE :search' , search: "%#{search}%")
       # binding.pry
     else
       Candidate.all
@@ -25,8 +27,9 @@ class CandidatesController < ApplicationController
   end
 
   def create
+    # binding.pry   
     @candidate = Candidate.new(candidate_params)
-    # binding.pry
+
     if @candidate.save
       redirect_to root_path, notice: "Your application is submitted"
     else  
@@ -35,7 +38,7 @@ class CandidatesController < ApplicationController
   end
 
   def edit
-    binding.pry
+    # binding.pry
     @candidate =  Candidate.find(params[:id])
   end
 
@@ -50,6 +53,14 @@ class CandidatesController < ApplicationController
     end    
   end
 
+  def status_update_check
+    # binding.pry
+    @candidate =  Candidate.find_by(email: params[:candidate][:email])
+    if @candidate.present? && @candidate.status == "rejected"
+      redirect_to root_path, notice: "your application has been rejected, please try again after #{@candidate.status_updated_at + 6.months}"
+    end
+  end
+
   def update
     @candidate = Candidate.find(params[:id])
     if @candidate.update(candidate_params)
@@ -62,6 +73,14 @@ class CandidatesController < ApplicationController
       end
     else
       render :edit
+    end
+  end
+
+  def change_update_date
+    # binding.pry
+    @candidate =  Candidate.find_by(email: params[:candidate][:email])
+    if @candidate.status != params[:status]
+      @candidate.update(status_updated_at: Time.now)
     end
   end
 
@@ -80,16 +99,15 @@ class CandidatesController < ApplicationController
   end
 
   def probing
-
   end
 
   private
     def candidate_params
-      params.require(:candidate).permit(:first_name, :search, :last_name, :avatar, :email, :current_location, :experience, :current_designation, :availability_for_joining, :security_question, :security_answer, :candidate_reference_id)
+      params.require(:candidate).permit(:first_name, :search, :last_name, :avatar, :email, :current_location, :experience, :current_designation, :availability_for_joining, :security_question, :security_answer, :candidate_reference_id, :status)
     end
 
     def restrict
-      redirect_to root_path unless current_user.role.designation == "Director"
-      flash[:notice] = "You need to be admin to edit. Please login as one"
+      redirect_to root_path unless current_user.role.designation == "Director" || current_user.role.designation == "Human Resource Executive"
+      flash[:notice] = "You need to be admin/hr to edit. Please login as one"
     end
 end

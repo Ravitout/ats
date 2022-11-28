@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_25_125907) do
+ActiveRecord::Schema.define(version: 2022_11_28_081941) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(version: 2022_11_25_125907) do
     t.string "security_answer"
     t.integer "candidate_reference_id", default: 3, null: false
     t.string "status", default: "applied", null: false
+    t.datetime "status_updated_at"
   end
 
   create_table "roles", force: :cascade do |t|

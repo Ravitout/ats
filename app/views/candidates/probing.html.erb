@@ -1,6 +1,6 @@
 <h3>Account Varification</h3>
 &nbsp
-<%= form_with model: @candidate do |form| %>
+<%= form_with model: @candidate, scope: "candidate" do |form| %>
   <div>
     <%= form.label :Enter_your_email %><br>
     <%= form.text_field :email %>

@@ -9,4 +9,7 @@ class Candidate < ApplicationRecord
 	validates :current_designation, presence: true
 	validates :availability_for_joining, presence: true
 	validates :avatar, presence:true
+	# before_save :status_update_check
+
+
 end

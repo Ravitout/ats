@@ -39,13 +39,16 @@
 <td><%= @candidate.security_answer %></td>
 <td><%= @candidate.candidate_reference.name%></td>
 <td><%= @candidate.status%></td>
+<td><%= @candidate.status_updated_at%></td>
 </tr>
 </table>
-<% if is_hr || is_sd %>
-<% else %>
+<% if is_admin %>
     <%= link_to "Edit", edit_candidate_path(@candidate) , class:"btn btn-outline-primary"%>
     <%= link_to "Destroy", candidate_path(@candidate), class:"btn btn-outline-primary",           method: :delete,
                   data: { confirm: "Are you sure?" } %>
+<%elsif is_hr%>
+    <%= link_to "Edit", edit_candidate_path(@candidate) , class:"btn btn-outline-primary"%>
+<% else %>
 <% end %>
 
 <%= link_to "Back", candidates_path , class:"btn btn-outline-primary"%>
