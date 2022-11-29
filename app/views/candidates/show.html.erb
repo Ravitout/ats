@@ -1,3 +1,4 @@
+<%= render "navbar"%>
 <h3>Candidate Details</h3>
 <table class="table table-hover">
   <tr>
@@ -39,7 +40,7 @@
 <td><%= @candidate.security_answer %></td>
 <td><%= @candidate.candidate_reference.name%></td>
 <td><%= @candidate.status%></td>
-<td><%= @candidate.status_updated_at%></td>
+
 </tr>
 </table>
 <% if is_admin %>

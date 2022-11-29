@@ -2,7 +2,7 @@ class CandidatesController < ApplicationController
   before_action :require_login, except: [:new, :create, :dashboard, :edit, :modify, :update, :probing]
   before_action :status_update_check, only: [:create, :modify]
   before_action :change_update_date, only: [:update]
-  before_action :restrict, only: [:edit ]
+  before_action :restrict, only: [:edit, :destroy]
   
 	def index
     if require_login
@@ -101,13 +101,13 @@ class CandidatesController < ApplicationController
   def probing
   end
 
+    def restrict
+      redirect_to root_path unless current_user.role.designation == "Director" || current_user.role.designation == "Human Resource Executive"
+      flash[:notice] = "You need to be admin/hr to edit. Please login as one"
+    end
   private
     def candidate_params
       params.require(:candidate).permit(:first_name, :search, :last_name, :avatar, :email, :current_location, :experience, :current_designation, :availability_for_joining, :security_question, :security_answer, :candidate_reference_id, :status)
     end
 
-    def restrict
-      redirect_to root_path unless current_user.role.designation == "Director" || current_user.role.designation == "Human Resource Executive"
-      flash[:notice] = "You need to be admin/hr to edit. Please login as one"
-    end
 end

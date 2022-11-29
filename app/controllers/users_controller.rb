@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :require_login, except: [:new, :create]
-  before_action :restrict, only: [:edit ]
+  before_action :restrict, only: [:edit, :destroy ]
   before_action :logged_in, except: [:index, :show, :edit, :update, :destroy, :approval, :decline]
 
 	def index
@@ -80,12 +80,10 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:first_name ,:last_name, :email, :email_confirmation, :password, :role_id, :password_confirmation, :avatar)
   end
-  
+
   def restrict
     redirect_to root_path unless current_user.role.designation == "Director"
-    if !is_admin
-      flash[:notice] = "You need to be admin to edit. Please login as one"
-    end
+    flash[:notice] = "You need to be admin for this action. Please login as one"
   end
 end
 
