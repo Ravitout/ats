@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  c_email: MyString
+  c_id: 1
+  adhar_card_no: 1
+  pan_card_no: 1
+
+two:
+  c_email: MyString
+  c_id: 1
+  adhar_card_no: 1
+  pan_card_no: 1

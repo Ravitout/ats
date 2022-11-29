@@ -1,0 +1,29 @@
+<%= render "candidates/navbar"%>
+<h3>Document Submission form</h3>
+&nbsp
+<%= form_with model: @candidate_clear, scope: "candidate_clear" do |form| %>
+<%#= form_with url: "/docs_submission", method: :get do |form| %>
+  <div>
+    <%= form.label :Enter_your_email %><br>
+    <%= form.text_field :candidate_email %>
+  </div>
+
+  <div>
+    <%= form.label :adhar_card_no %><br>
+    <%= form.text_field :adhar_card_no %>
+  </div>
+ <%= form.file_field :adhar_doc %>
+  <div>
+    <%= form.label :pan_card_no %><br>
+    <%= form.text_field :pan_card_no %>
+  </div>
+  <%= form.file_field :pan_doc %><br>
+
+    <%= form.submit %>
+  </div>
+<% flash.each do |type, msg| %>
+  <div class="alert alert-info">
+   <%= msg %>
+  </div>
+<% end%>
+<%end%>

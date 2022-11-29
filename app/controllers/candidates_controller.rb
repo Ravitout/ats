@@ -29,7 +29,6 @@ class CandidatesController < ApplicationController
   def create
     # binding.pry   
     @candidate = Candidate.new(candidate_params)
-
     if @candidate.save
       redirect_to root_path, notice: "Your application is submitted"
     else  
@@ -58,6 +57,12 @@ class CandidatesController < ApplicationController
     @candidate =  Candidate.find_by(email: params[:candidate][:email])
     if @candidate.present? && @candidate.status == "rejected"
       redirect_to root_path, notice: "your application has been rejected, please try again after #{@candidate.status_updated_at + 6.months}"
+      return
+    elsif @candidate.CandidateClear.present?
+      redirect_to root_path, notice: "You have already submitted the documents"
+      return
+    elsif @candidate.present? && @candidate.status == "clear"
+      redirect_to docs_submission_path, notice: "your application has been cleared, Please fill the form to process further"
     end
   end
 

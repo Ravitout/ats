@@ -11,4 +11,6 @@ root "candidates#dashboard"
   get 'decline/:id', to: 'users#decline', as: :declined
   get 'probing', to: 'candidates#probing', as: :probing
   post 'probing', to: 'candidates#modify' 
+  get 'docs_submission', to: 'candidate_clears#new'
+  post 'docs_submission', to: 'candidate_clears#create'
 end

@@ -1,4 +1,5 @@
 class Candidate < ApplicationRecord
+	has_one :CandidateClear
 	has_one_attached :avatar
 	belongs_to :candidate_reference
 	validates :first_name, presence: true
@@ -10,6 +11,4 @@ class Candidate < ApplicationRecord
 	validates :availability_for_joining, presence: true
 	validates :avatar, presence:true
 	# before_save :status_update_check
-
-
 end

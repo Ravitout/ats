@@ -1,0 +1,2 @@
+module CandidateClearsHelper
+end
