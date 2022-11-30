@@ -1,5 +1,6 @@
 class CandidateClearsController < ApplicationController
 	before_action :fetch_id, only: [:create]
+  before_action :require_login, only: [:index]
 	before_action :already_submitted, only: [:create]
 	def new
 		@candidate_c = CandidateClear.new
@@ -13,6 +14,10 @@ class CandidateClearsController < ApplicationController
     else  
       render :new
     end
+  end
+
+  def index
+    @candidate_c = CandidateClear.all
   end
 
   def fetch_id

@@ -13,4 +13,5 @@ root "candidates#dashboard"
   post 'probing', to: 'candidates#modify' 
   get 'docs_submission', to: 'candidate_clears#new'
   post 'docs_submission', to: 'candidate_clears#create'
+  get 'docs_view', to: 'candidate_clears#index'
 end
