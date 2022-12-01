@@ -1,0 +1,72 @@
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<%= form_with model: @job_post, url: update_post_path ,method: :put, scope:"job_post" do |form| %>
+<div class="card">
+  <div class="card-body">
+    
+    <div class="mb-3">
+      <%= form.label :job_title, { class: "form-label"} %><br>
+      <%= form.text_field :job_title,  { class: "form-control", value: job_post.job_title } %>
+      <%# @job_post.errors.full_messages_for(:job_title).each do |message| %>
+        <div><%#= message %></div>
+      <%# end %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :user_id, { class: "form-label"} %><br>
+      <%= form.text_field :user_id, { class: "form-control" , value: job_post.user_id} %>
+      <%# @job_post.errors.full_messages_for(:job_title).each do |message| %>
+        <div><%#= message %></div>
+      <%# end %>
+    </div>
+
+    <div>
+      <%= form.label :Educational_Required, { class: "form-label"} %><br>
+      <%= form.text_field :education_req, { class: "form-control", value: job_post.education_req } %>
+      <%# @job_post.errors.full_messages_for(:education_req).each do |message| %>
+        <div><%#= message %></div>
+      <%# end %>
+    </div>
+
+
+
+    <div>
+      <%= form.label :experience_needed, { class: "form-label"} %><br>
+      <%= form.text_field :experience_needed, { class: "form-control", value: job_post.experience_needed } %>
+      <%# @job_post.errors.full_messages_for(:experience_needed).each do |message| %>
+        <div><%#= message %></div>
+      <%# end %>
+    </div>
+
+    <div>
+      <%= form.label :job_location, { class: "form-label"} %><br>
+      <%= form.text_field :job_location, { class: "form-control", value: job_post.job_location} %>
+      <%# @job_post.errors.full_messages_for(:job_location).each do |message| %>
+        <div><%#= message %></div>
+      <%# end %>
+    </div>
+
+    <div>
+      <%= form.label :job_type, { class: "form-label"} %><br>
+      <%= form.select :job_type,["on-site","hybrid", "wfo"],{ class:"form-select form-select-lg mb-3", value: job_post.job_type } %>
+      <%# @job_post.errors.full_messages_for(:job_type).each do |message| %>
+        <div><%#= message %></div>
+      <%# end %>
+    </div>
+    &nbsp
+    <div>
+      <%= form.label :job_description , { class: "form-label"}%><br>
+      <%= form.text_area :job_des, { class: "form-control", value: job_post.job_des } %>
+      <%# @job_post.errors.full_messages_for(:job_des).each do |message| %>
+        <div><%#= message %></div>
+      <%# end %>
+    </div> 
+    &nbsp
+    <div>
+      <%= form.submit 'update'%>
+    </div>
+
+  </div>
+</div>
+<%# end %>
+<% end %>

@@ -32,6 +32,7 @@ class ApplicationController < ActionController::Base
   end
 
   def require_login
+    # binding.pry 
   	if current_user == nil
     	flash[:error] = "You must be logged in to access this section"
     	# redirect_to sign_in_url

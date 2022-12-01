@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 resources :users 
 resources :candidates
+# resources :job_posts
 root "candidates#dashboard"
   # get 'sessions/new'
   get    'sign_in', to: 'sessions#new'
@@ -14,4 +15,13 @@ root "candidates#dashboard"
   get 'docs_submission', to: 'candidate_clears#new'
   post 'docs_submission', to: 'candidate_clears#create'
   get 'docs_view', to: 'candidate_clears#index'
+  get 'job_posts', to: 'job_posts#index'
+  get 'job_posts/new', to: 'job_posts#new'
+  post 'job_posts/new', to: 'job_posts#create'
+  get '/job_post/:id', to: 'job_posts#show'
+  get '/job_posts/:id/edit', to: 'job_posts#edit', as: :edit_jobpost
+  put '/job_posts/:id', to: 'job_posts#update', as: :update_post
+  delete '/job_posts/:id', to: 'job_posts#destroy'
+  get 'post_approve/:id', to: 'job_posts#approval', as: :post_approved
+  get 'post_decline/:id', to: 'job_posts#declined', as: :post_declined
 end

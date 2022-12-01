@@ -1,0 +1,53 @@
+<%= render "candidates/navbar"%>
+<table class="table table-hover">
+  <tr>
+  	<th>S.no</th>
+    <th>Job Title</th>
+    <th>Educational Required</th>
+    <th>Experience needed</th>
+    <th>job location</th>
+    <th>job type</th>
+  </tr>
+  
+  <% @jobposts.each do |post| %>
+
+  <tr id="jobpostRow_<%=post.id%>">
+    <td><a href="/job_post/<%= post.id %>">
+        <%= post.id %>
+    </a></td>
+    <td><%= post&.job_title %></td>
+    <td><%= post&.education_req %></td>
+    <td><%= post&.experience_needed %></td>
+    <td><%= post.job_location%></td>
+    <td><%= post.job_type%></td>
+    <% if current_user == nil %>
+    <% elsif is_admin %>
+    <td><%= link_to "Destroy", "/job_posts/#{post.id}",
+                  method: :delete,
+                  data: { confirm: "Are you sure?" }, remote: true %>
+      <td><%= post.status%></td>
+      <% if post.status == "post_declined"%>
+      <%#binding.pry%>
+        <td><%= link_to "Approve Post", post_approved_path(id: post.id)%></td>
+      <% elsif post.status == "post_approved"%>
+        <td><%= link_to "Decline Post", post_declined_path(id: post.id),
+                  data: { confirm: "Are you sure?" }%></td>
+      <%else%>
+        <td><%= link_to "Approve Post", post_approved_path(id: post.id)%>
+          &nbsp&nbsp
+          <%= link_to "Decline Post", post_declined_path(id: post.id),
+          data: { confirm: "Are you sure?" }%></td>
+      <% end%>
+    <% end %></td>
+  </tr>
+  <% end %>
+</table>
+<% if current_user == nil %>
+<% elsif is_admin || is_hr%>
+  <%= link_to "New Job Post", job_posts_new_path, class:"btn btn-outline-primary" %>
+<% end %>
+<% flash.each do |type, msg| %>
+  <div class="alert alert-info">
+    <%= msg %>
+  </div>
+<% end %>

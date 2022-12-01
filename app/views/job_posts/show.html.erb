@@ -1,0 +1,29 @@
+<%= render "candidates/navbar"%>
+<table class="table table-hover">
+  <tr>
+  	<th>S.no</th>
+    <th>Job Title</th>
+    <th>Educational Required</th>
+    <th>Experience needed</th>
+    <th>job location</th>
+    <th>job type</th>
+  </tr>
+  
+    <td><%= @jobpost.id %></td>
+    <td><%= @jobpost&.job_title %></td>
+    <td><%= @jobpost&.education_req %></td>
+    <td><%= @jobpost&.experience_needed %></td>
+    <td><%= @jobpost.job_location%></td>
+    <td><%= @jobpost.job_type%></td>
+    
+    <% if current_user == nil %>
+    <% elsif is_admin || is_hr %>
+    <%= link_to "Edit", edit_jobpost_path(@jobpost) , class:"btn btn-outline-primary"%>
+    <td><%= link_to "Destroy", job_posts_path(@jobpost),
+                  method: :delete,
+                  data: { confirm: "Are you sure?" }, remote: true %>
+    <% end %></td>
+  </tr>
+</table>
+<h5>Job Description</h5>
+<p><%= @jobpost.job_des%></p>
