@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
   
   def create
     if session[:user_id] != nil
-      flash[:notice] = "please logout first"
+      flash[:notice] = "You are already logged in"
       render :new
     else
       user = User.find_by(email: params[:email])

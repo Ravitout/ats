@@ -1,11 +1,8 @@
 class JobPostsController < ApplicationController
   before_action :login_required, only: [:new, :create, :edit, :destroy]
 
-	# def index
-	# 	@jobposts =  JobPost.all
-	# end
   def index  
-    if current_user == nil || current_user
+    if current_user == nil || is_hr || is_sd
     @jobposts =  JobPost.where(status: "post_approved")   
     elsif is_admin     
       @jobposts =  JobPost.all   
@@ -14,7 +11,7 @@ class JobPostsController < ApplicationController
 
 	def new
     if current_user == nil || current_user
-    elsif is_admin || is_hr
+      elsif is_admin || is_hr
       @jobpost = JobPost.new
     end
   end
@@ -35,7 +32,7 @@ class JobPostsController < ApplicationController
   end
 
   def edit
-    if is_sd || current_user == nil
+    if is_sd 
       flash[:error] = "You must be logged in as admin to access this action"
       redirect_to root_path
     else
@@ -89,8 +86,8 @@ class JobPostsController < ApplicationController
 
 
   private
-    def job_post_params
-    	# binding.pry
-      params.require(:job_post).permit(:job_title, :user_id , :education_req, :email, :experience_needed, :job_location, :job_type, :job_des)
-    end
+  def job_post_params
+  	# binding.pry
+    params.require(:job_post).permit(:job_title, :user_id , :education_req, :email, :experience_needed, :job_location, :job_type, :job_des)
+  end
 end

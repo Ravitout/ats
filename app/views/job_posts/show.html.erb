@@ -19,7 +19,7 @@
     <% if current_user == nil %>
     <% elsif is_admin || is_hr %>
     <%= link_to "Edit", edit_jobpost_path(@jobpost) , class:"btn btn-outline-primary"%>
-    <td><%= link_to "Destroy", job_posts_path(@jobpost),
+    <td><%= link_to "Destroy", "/job_posts/#{@jobpost.id}",
                   method: :delete,
                   data: { confirm: "Are you sure?" }, remote: true %>
     <% end %></td>
