@@ -4,10 +4,12 @@
     <th></th>
     <th>Candidate Email</th>
     <th>Candidate ID</th>
-    <th>Adhar Card no</th>
-    <th>Pan Card no</th>
-    <th>Adhar card</th>
-    <th>Pan card</th>
+    <% if is_admin || is_hr %>
+      <th>Adhar Card no</th>
+      <th>Pan Card no</th>
+      <th>Adhar card</th>
+      <th>Pan card</th>
+    <%end%>
   </tr>
   
   <% @candidate_c.each do |candidate| %>
@@ -15,15 +17,15 @@
     <td><%= candidate.id %></td>
     <td><%= candidate.candidate_email %></td>
     <td><a href="/candidates/<%= candidate.candidate_id %>"><%= candidate.candidate_id%></a></td>
+    <% if is_admin || is_hr %>
     <td><%= candidate.adhar_card_no %></td>
     <td><%= candidate&.pan_card_no %></td>
     <td><%=link_to 'adhar card', rails_blob_path(candidate.adhar_doc, disposition: "preview"), target: '_blank'%></td>
     <td><%=link_to 'pan card', rails_blob_path(candidate.pan_doc, disposition: "preview"), target: '_blank'%></td>
-    <% if is_admin || is_hr %>
-<!--     <td><%#= link_to "Destroy", candidate,
+    <td><%#= link_to "Destroy", candidate,
                   method: :delete,
                   data: { confirm: "Are you sure?" }, remote: true %>
-    <% end %></td> -->
+    <% end %></td>
   </tr>
   <% end %>
 </table>

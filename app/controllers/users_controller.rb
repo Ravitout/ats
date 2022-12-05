@@ -82,8 +82,13 @@ class UsersController < ApplicationController
   end
 
   def restrict
-    redirect_to root_path unless current_user.role.designation == "Director"
-    flash[:notice] = "You need to be admin for this action. Please login as one"
+    # binding.pry
+    # redirect_to root_path unless current_user.role.designation == "Director"
+    # flash[:notice] = "You need to be admin for this action. Please login as one"
+
+    if current_user.role.designation != "Director"
+    redirect_to root_path, notice: "You need to be admin for this action. Please login as one"
+    end
   end
 end
 

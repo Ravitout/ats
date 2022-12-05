@@ -42,8 +42,10 @@ class CandidatesController < ApplicationController
   end
 
   def modify
-   @candidate =  Candidate.find_by(email: params[:email])
-   if @candidate.present? && @candidate.email == params[:email] && @candidate.security_question == params[:security_question] && @candidate.security_answer == params[:security_answer]
+    #binding.pry
+   # @candidate =  Candidate.find_by(email: params[:email])
+   @candidate =  Candidate.find_by(email: params[:candidate][:email])
+   if @candidate.present? && @candidate.email == params[:candidate][:email] && @candidate.security_question == params[:candidate][:security_question] && @candidate.security_answer == params[:candidate][:security_answer]
     render :edit
     return
     else
@@ -58,7 +60,7 @@ class CandidatesController < ApplicationController
     if @candidate.present? && @candidate.status == "rejected"
       redirect_to root_path, notice: "your application has been rejected, please try again after #{@candidate.status_updated_at + 6.months}"
       return
-    elsif @candidate.CandidateClear.present?
+    elsif @candidate.present? && @candidate.CandidateClear.present?
       redirect_to root_path, notice: "You have already submitted the documents"
       return
     elsif @candidate.present? && @candidate.status == "clear"
