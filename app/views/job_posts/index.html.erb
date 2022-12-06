@@ -20,8 +20,8 @@
     <td><%= post&.experience_needed %> year</td>
     <td><%= post.job_location%></td>
     <td><%= post.job_type%></td>
-    <% if current_user == nil %>
-    <% elsif is_admin %>
+    <%# if current_user == nil %>
+    <%# elsif is_admin %>
     <td><%= link_to "Destroy", "/job_posts/#{post.id}",
                   method: :delete,
                   data: { confirm: "Are you sure?" }, remote: true %>
@@ -38,14 +38,14 @@
           <%= link_to "Decline Post", post_declined_path(id: post.id),
           data: { confirm: "Are you sure?" }%></td>
       <% end%>
-    <% end %></td>
+    <%# end %></td>
   </tr>
   <% end %>
 </table>
-<% if current_user == nil %>
-<% elsif is_admin || is_hr%>
+<%# if current_user == nil %>
+<%# elsif is_admin || is_hr%>
   <%= link_to "New Job Post", job_posts_new_path, class:"btn btn-outline-primary" %>
-<% end %>
+<%# end %>
 <% flash.each do |type, msg| %>
   <div class="alert alert-info">
     <%= msg %>

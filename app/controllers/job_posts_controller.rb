@@ -1,19 +1,19 @@
 class JobPostsController < ApplicationController
-  before_action :login_required, only: [:new, :create, :edit, :destroy]
+  # before_action :login_required, only: [:new, :create, :edit, :destroy]
 
   def index  
-    if current_user == nil || is_hr || is_sd
-    @jobposts =  JobPost.where(status: "post_approved")   
-    elsif is_admin     
+    # if current_user == nil || is_hr || is_sd
+    # @jobposts =  JobPost.where(status: "post_approved")   
+    # elsif is_admin     
       @jobposts =  JobPost.all   
-    end  
+    # end  
   end
 
 	def new
-    if current_user == nil || current_user
-      elsif is_admin || is_hr
+    # if current_user == nil || current_user
+      # elsif is_admin || is_hr
       @jobpost = JobPost.new
-    end
+    # end
   end
 
 	def show 
@@ -32,12 +32,12 @@ class JobPostsController < ApplicationController
   end
 
   def edit
-    if is_sd 
-      flash[:error] = "You must be logged in as admin to access this action"
-      redirect_to root_path
-    else
-    @jobpost = JobPost.find(params[:id])
-    end
+    # if is_sd 
+      # flash[:error] = "You must be logged in as admin to access this action"
+      # redirect_to root_path
+    # else
+      @jobpost = JobPost.find(params[:id])
+    # end
   end
 
   def update
@@ -50,14 +50,14 @@ class JobPostsController < ApplicationController
   end
 
   def destroy
-    if is_admin
+    # if is_admin
       @jobpost = JobPost.find(params[:id])
       @jobpost.destroy
       redirect_to job_posts_path, notice: "record deleted"
       return
-    else
-      redirect_to job_posts_path, notice: "You need to be admin for deleting"
-    end
+    # else
+      # redirect_to job_posts_path, notice: "You need to be admin for deleting"
+    # end
   end
 
   def approval

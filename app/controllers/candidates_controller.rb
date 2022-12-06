@@ -1,18 +1,18 @@
 class CandidatesController < ApplicationController
-  before_action :require_login, except: [:new, :create, :dashboard, :edit, :modify, :update, :probing]
+  # before_action :require_login, except: [:new, :create, :dashboard, :edit, :modify, :update, :probing]
   before_action :status_update_check, only: [:create, :modify]
   before_action :change_update_date, only: [:update]
-  before_action :restrict, only: [:edit, :destroy]
-  
+  # before_action :restrict, only: [:edit, :destroy]
+  before_action :authenticate_user!, except: [:dashboard, :probing, :create, :new] 
 	def index
-    if require_login
-      redirect_to root_path
-    end
+    # if require_login
+    #   redirect_to root_path
+    # end
     search = params[:q]
     @candidates = if search
       Candidate.joins(:candidate_reference).where('first_name LIKE :search OR last_name LIKE :search OR current_designation LIKE :search OR candidate_references.name LIKE :search OR status LIKE :search' , search: "%#{search}%")
       # binding.pry
-    else
+    else  
       Candidate.all
    end
 	end

@@ -1,14 +1,15 @@
 class UsersController < ApplicationController
-  before_action :require_login, except: [:new, :create]
-  before_action :restrict, only: [:edit, :destroy ]
-  before_action :logged_in, except: [:index, :show, :edit, :update, :destroy, :approval, :decline]
+  # before_action :require_login, except: [:new, :create]
+  # before_action :restrict, only: [:edit, :destroy ]
+  # before_action :logged_in, except: [:index, :show, :edit, :update, :destroy, :approval, :decline]
+  before_action :authenticate_user!
 
 	def index
    # @users = User.search(
    search = params[:q]
-   if require_login
-    redirect_to root_path
-   end
+   # if require_login
+   #  redirect_to root_path
+   # end
     @users = if search
       User.joins(:role).where('first_name LIKE :search OR roles.designation LIKE :search', search: "%#{search}%")
     else
@@ -35,12 +36,12 @@ class UsersController < ApplicationController
   end
 
   def edit
-    if is_hr || is_sd
-      flash[:error] = "You must be logged in as admin to access this action"
-      redirect_to users_path
-    else
+    # if is_hr || is_sd
+    #   flash[:error] = "You must be logged in as admin to access this action"
+    #   redirect_to users_path
+    # else
       @user = User.find(params[:id])
-    end
+    # end
   end
 
   def update
@@ -78,7 +79,7 @@ class UsersController < ApplicationController
   
   private
   def user_params
-    params.require(:user).permit(:first_name ,:last_name, :email, :email_confirmation, :password, :role_id, :password_confirmation, :avatar)
+    params.require(:user).permit(:first_name ,:last_name, :email, :password, :role_id, :password_confirmation, :avatar)
   end
 
   def restrict

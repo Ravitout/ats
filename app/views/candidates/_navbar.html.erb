@@ -26,11 +26,12 @@
 
         <% if current_user%>
         <li class="nav-item ">
-          <a class="nav-link active" aria-current="page" href="logout_path"><%= link_to "Log out", logout_path, method: :delete, class:"btn btn-outline-primary" %>  </a>
+          <!-- <a class="nav-link active" aria-current="page" href="logout_path"><%#= link_to "Log out", logout_path, method: :delete, class:"btn btn-outline-primary" %>  </a> -->
         </li>
+        <li><%=link_to "Log out", destroy_user_session_path, method: :delete %></li>
         <%else%>
         <li class="nav-item" >
-          <%= link_to "User Sign In", sign_in_path , { class: "nav-link active" }%>
+          <%= link_to "User Sign In", user_session_path , { class: "nav-link active" }%>
         </li>
         <li class="nav-item ">
           <%= link_to "User Sign Up", new_user_path , { class: "nav-link active" }%>

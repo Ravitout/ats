@@ -19,13 +19,13 @@
     <td><%= candidate.candidate_reference.name%></td>
     <td><%= candidate.status%></td>
     <td><%#= candidate.status_updated_at%></td>
-    <% if is_admin || is_hr %>
+    <%# if is_admin || is_hr %>
     <td><%= link_to "Destroy", candidate,
                   method: :delete,
                   data: { confirm: "Are you sure?" }, remote: true %>
     <% end %></td>
   </tr>
-  <% end %>
+  <%# end %>
 </table>
 
 <% flash.each do |type, msg| %>

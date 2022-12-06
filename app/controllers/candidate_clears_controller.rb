@@ -1,6 +1,6 @@
 class CandidateClearsController < ApplicationController
 	before_action :fetch_id, only: [:create]
-  before_action :require_login, only: [:index]
+  # before_action :require_login, only: [:index]
 	before_action :already_submitted, only: [:create]
 	def new
 		@candidate_c = CandidateClear.new

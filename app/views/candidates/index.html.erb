@@ -10,11 +10,11 @@
   <%= render "index"%>
 </div>
 <%= link_to "New candidate", new_candidate_path, class:"btn btn-outline-primary" %>
-<%= link_to "Back", users_path, class:"btn btn-outline-primary" %>
+<%= link_to "Back", user_session_path, class:"btn btn-outline-primary" %>
 <%= link_to "Home", root_path , class:"btn btn-outline-primary"%>
-<% if is_admin || is_hr %>
+<%# if is_admin || is_hr %>
   <%= link_to "Cleared Candidates Docs", docs_view_path, class:"btn btn-outline-primary"%>
-<% end %>
+<%# end %>
 
 <script type="text/javascript">
   $("#search_candidates").keyup(function(){

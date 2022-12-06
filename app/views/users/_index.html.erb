@@ -3,11 +3,11 @@
     <th>User ID</th>
     <th>First Name</th>
     <th>Designation</th>
-    <% if is_hr || is_sd %>
-    <% else %>
+    <%# if is_hr || is_sd %>
+    <%# else %>
     <th>Delete</th>
     <th>Login authority</th>
-    <% end%>
+    <%# end%>
   </tr>
  
   <% @users.each do |user| %>
@@ -15,7 +15,7 @@
    		<td><a href="/users/<%= user.id %>"><%=user.id%></td>
    		<td><%=user.first_name%></td>
    		<td><%=user&.role&.designation%></td>
-    	<% if is_admin %>
+    	<%# if is_admin %>
     		<td><%= link_to "Delete", user,
                   method: :delete,
                   data: { confirm: "Are you sure?" }, remote: true %>
@@ -31,7 +31,7 @@
           <%= link_to "Decline", declined_path(id: user.id), remote: true,
           data: { confirm: "Are you sure?" }%></td>
       <% end%>
-  		<% end%></td>
+  		<%# end%></td>
   	</tr>
   <% end %>
 </table>

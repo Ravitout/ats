@@ -38,8 +38,8 @@
       <% @user.errors.full_messages_for(:email_confirmation).each do |message| %>
         <div><%= message %></div>
       <% end %>
-
     </div class="mb-3">
+    
     <div>
       <%= form.label :role_id , { class: "form-label"}%><br>
       <%= form.select :role_id, Role.all.pluck(:designation, :id ),{ class:"form-select form-select-lg mb-3" } %>
